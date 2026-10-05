@@ -277,11 +277,6 @@ form label.consent{display:flex;align-items:flex-start;gap:12px;font-weight:600;
 [aria-invalid="true"]{border-color:var(--deep)!important;background:#FFF1EA}
 .form-msg{border:2px solid var(--ink);border-radius:14px;padding:12px 16px;font-weight:700}
 .form-msg.hiba{background:#FFE2D3}
-.form-done{text-align:center;display:grid;justify-items:center;gap:14px;padding:44px 24px;background:var(--pale)}
-.form-done h3{font-family:Anton,Archivo,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(36px,8vw,56px);line-height:1.1}
-.form-done .ok{width:72px;height:72px;border-radius:50%;background:var(--lemon);border:2px solid var(--ink);display:grid;place-items:center;font-size:36px;font-weight:900}
-.form-done[hidden],form[hidden]{display:none}
-.form-grid .form-done{width:min(880px,100%);margin-inline:auto}
 
 /* lábléc */
 footer{background:var(--ink);color:var(--white)}
@@ -506,9 +501,12 @@ footer{background:var(--ink);color:var(--white)}
       <h2 class="disp">Kérj ajánlatot<br>a gépre.</h2>
       <p class="lead">Írd meg, mit zárnál le és mekkora mennyiségben. A gépet a dobozodhoz és a fedeledhez igazítva ajánljuk ki.</p>
     </div>
-    <form class="card" action="ajanlat.php" method="post" novalidate>
-      <label class="hp" aria-hidden="true">Weboldal<input name="weboldal" tabindex="-1" autocomplete="off"></label>
-      <input type="hidden" name="kt" value="">
+    <!-- Beküldés: FormSubmit (formsubmit.co) → e-mail a CIMZETT-nek. Aktiválás után a címet cseréld a kapott álnévre (itt és a szkriptben). -->
+    <form class="card" action="https://formsubmit.co/mullerdanielev@gmail.com" method="post" novalidate>
+      <input type="hidden" name="_subject" value="[CUP SEAL] Ajánlatkérés">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://cupseal.hu/koszonjuk.html">
+      <label class="hp" aria-hidden="true">Weboldal<input name="_honey" tabindex="-1" autocomplete="off"></label>
       <label>Név<input name="nev" autocomplete="name" required></label>
       <label>Cég / üzlet neve<input name="ceg" autocomplete="organization"></label>
       <label>Telefon<input name="telefon" type="tel" inputmode="tel" autocomplete="tel" required></label>
@@ -544,11 +542,6 @@ footer{background:var(--ink);color:var(--white)}
       <div class="form-msg hiba full" role="alert" hidden></div>
       <button class="btn full" type="submit">Ajánlatkérés elküldése ↗</button>
     </form>
-    <div class="card form-done" hidden tabindex="-1">
-      <span class="ok" aria-hidden="true">✓</span>
-      <h3>Megkaptuk!</h3>
-      <p class="lead">Köszönjük az ajánlatkérést. Hamarosan jelentkezünk telefonon vagy e-mailben.</p>
-    </div>
   </div>
 </section>
 
@@ -798,36 +791,88 @@ document.querySelectorAll('[data-carousel]').forEach(function (c) {
   szamol(); frissit();
 });
 
-// Ajánlatkérés: beküldés oldalújratöltés nélkül; JS nélkül a sima POST → köszönőoldal működik.
+// Ajánlatkérés: FormSubmit AJAX-on keresztül, oldalújratöltés nélkül; JS nélkül a sima POST → köszönőoldal.
 (function () {
+  var CEL = 'https://formsubmit.co/ajax/mullerdanielev@gmail.com';  // aktiválás után: a FormSubmit által küldött álnév
   var f = document.querySelector('#ajanlat form');
   if (!f || !window.fetch) return;
   var kezdet = Date.now();
-  var msg = f.querySelector('.form-msg'), btn = f.querySelector('[type=submit]'), kesz = document.querySelector('.form-done');
+  var msg = f.querySelector('.form-msg'), btn = f.querySelector('[type=submit]');
+  var SZIN = { feher: 'Fehér', fekete: 'Fekete', mindegy: 'Még nem tudja' };
+  var MELLE = { adapter: 'Adapter', doboz: 'Dobozok', fedel: 'Fedelek' };
   function jelol(nevek) {
     f.querySelectorAll('[aria-invalid]').forEach(function (el) { el.removeAttribute('aria-invalid'); });
     nevek.forEach(function (n) { var el = f.elements[n]; if (el) el.setAttribute('aria-invalid', 'true'); });
     var elso = nevek.length && f.elements[nevek[0]]; if (elso && elso.focus) elso.focus();
   }
   function hiba(szoveg, mezok) { msg.textContent = szoveg; msg.hidden = false; jelol(mezok || []); }
+  function kesz_() { location.href = 'koszonjuk.html'; }
+  // Hagyományos (nem AJAX) beküldés. A FormSubmit így csak ékezet nélküli szöveget fogad el, ezért átírjuk.
+  function ekezetNelkul(t) {
+    return String(t).normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[–—]/g, '-').replace(/[„”“]/g, '"').replace(/[^\x20-\x7e\n]/g, '');
+  }
+  function tartalek(adat) {
+    var ff = document.createElement('form');
+    ff.method = 'POST'; ff.action = CEL.replace('/ajax/', '/'); ff.hidden = true;
+    adat._next = new URL('koszonjuk.html', location.href).href;
+    delete adat._autoresponse;
+    Object.keys(adat).forEach(function (k) {
+      var i = document.createElement('input');
+      i.type = 'hidden'; i.name = ekezetNelkul(k); i.value = ekezetNelkul(adat[k]);
+      ff.appendChild(i);
+    });
+    document.body.appendChild(ff);
+    ff.submit();
+  }
+  function ertek(n) { return (f.elements[n] && f.elements[n].value || '').trim(); }
   f.addEventListener('submit', function (e) {
     e.preventDefault();
-    f.elements.kt.value = String(Date.now() - kezdet);
     msg.hidden = true;
     var rossz = ['nev', 'telefon', 'email', 'adatkezeles'].filter(function (n) { return !f.elements[n].checkValidity(); });
     if (rossz.length) return hiba('Kérjük, töltsd ki a megjelölt mezőket, és fogadd el az adatkezelési tájékoztatót.', rossz);
+    // robotszűrés: kitöltött rejtett mező vagy 3 mp-nél gyorsabb beküldés → csendben „sikeres”
+    if (ertek('_honey') || Date.now() - kezdet < 3000) return kesz_();
+    var szin = (f.querySelector('input[name="szin"]:checked') || {}).value;
+    var melle = Array.prototype.map.call(f.querySelectorAll('input[name="melle[]"]:checked'), function (c) { return MELLE[c.value]; });
+    var nev = ertek('nev'), ceg = ertek('ceg');
+    // JSON-ként küldjük: a FormSubmit multipart módban az ékezetes karaktereken elhasal (500-as hiba).
+    var adat = {};
+    adat['Név'] = nev;
+    adat['Cég / üzlet'] = ceg || '–';
+    adat['Telefon'] = ertek('telefon');
+    adat['email'] = ertek('email');
+    adat['Gép színe'] = SZIN[szin] || '–';
+    adat['A gép mellé kér'] = melle.length ? melle.join(', ') : '–';
+    adat['Dobozméret'] = ertek('meret') || '–';
+    adat['Havi darabszám'] = ertek('mennyiseg') || '–';
+    adat['Mit zárna le'] = ertek('uzenet') || '–';
+    adat['Adatkezelési tájékoztató'] = 'Elfogadta';
+    adat['_subject'] = '[CUP SEAL] Ajánlatkérés – ' + nev + (ceg ? ' (' + ceg + ')' : '');
+    adat['_template'] = 'table';
+    adat['_captcha'] = 'false';
+    adat['_autoresponse'] = 'Köszönjük, megkaptuk az ajánlatkérésed a CUP SEAL dobozzáró gépre! Hamarosan jelentkezünk telefonon vagy e-mailben, és egyeztetjük a próbazárást. – CUP SEAL, https://cupseal.hu';
     var eredeti = btn.textContent; btn.disabled = true; btn.textContent = 'Küldés…';
-    fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })
+    fetch(CEL, { method: 'POST', body: JSON.stringify(adat), headers: { 'Content-Type': 'application/json', Accept: 'application/json' } })
       .then(function (r) { return r.json(); })
       .then(function (d) {
-        if (!d.ok) return hiba(d.uzenet, d.mezok);
-        f.hidden = true; kesz.hidden = false; kesz.focus();
+        if (d && (d.success === true || d.success === 'true')) return kesz_();
+        var m = (d && d.message) || '';
+        if (window.console) console.warn('FormSubmit:', m);
+        if (/activat/i.test(m)) return hiba('Az űrlap erről a webcímről még nincs aktiválva. A FormSubmit aktiváló levelet küldött a fogadó postafiókba – az „Activate Form” gombbal jóváhagyva működni fog.');
+        if (/web server/i.test(m) || location.protocol === 'file:') return hiba('Az űrlap csak weboldalként megnyitva működik (http/https), fájlként megnyitva nem.');
+        hiba('Most nem sikerült elküldeni. Kérjük, próbáld újra néhány perc múlva.');
       })
-      .catch(function () { hiba('Nem sikerült elküldeni. Ellenőrizd az internetkapcsolatot, és próbáld újra.'); })
+      .catch(function (err) {
+        // A háttérküldés el sem jutott a FormSubmitig (pl. blokkoló bővítmény) → hagyományos beküldés.
+        if (window.console) console.warn('FormSubmit AJAX hiba, hagyományos beküldés:', err);
+        tartalek(adat);
+      })
       .finally(function () { btn.disabled = false; btn.textContent = eredeti; });
   });
 })();
 </script>
 <script src="assets/suti.js" defer></script>
+<script src="assets/meta-pixel.js" defer></script>
 </body>
 </html>

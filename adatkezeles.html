@@ -78,24 +78,27 @@
       <h3>Időtartam</h3>
       <p>Ha nem jön létre szerződés, az ajánlatkérést az utolsó kapcsolatfelvételtől számított <strong>1 év</strong> elteltével töröljük. Ha vásárlás történik, a számviteli bizonylatokon szereplő adatokat a számvitelről szóló 2000. évi C. törvény 169. §-a alapján <strong>8 évig</strong> őrizzük meg.</p>
       <h3>Hogyan tároljuk?</h3>
-      <p>Az űrlap adatait nem mentjük adatbázisba: a szerver e-mailben továbbítja őket a fenti címünkre, és a postafiókunkban tároljuk őket. A beküldésről a megadott e-mail-címre automatikus visszaigazoló levelet küldünk, amely a beküldött adatokat nem tartalmazza. Az adatokat nem adjuk el, és nem használjuk hírlevélre vagy reklámra.</p>
+      <p>Az űrlap adatait nem mentjük adatbázisba: a FormSubmit (formsubmit.co) űrlaptovábbító szolgáltatás e-mailben eljuttatja őket hozzánk, és a postafiókunkban tároljuk őket. A beküldésről a megadott e-mail-címre automatikus visszaigazoló levelet küldünk. Az adatokat nem adjuk el, és nem használjuk hírlevélre vagy reklámra.</p>
       <h3>Visszaélések elleni védelem</h3>
-      <p>A tömeges, automatizált küldések kiszűrésére az IP-címedből képzett, vissza nem fejthető kivonatot legfeljebb 1 óráig tároljuk. Jogalap: jogos érdek, GDPR 6. cikk (1) f) pont.</p>
+      <p>A tömeges, automatizált küldések kiszűrésére az űrlap egy rejtett ellenőrző mezőt és a kitöltési időt figyeli; ehhez személyes adatot nem tárolunk.</p>
 
       <h2 id="naplo">Szervernapló</h2>
       <p>A tárhelyszolgáltató szervere minden látogatásnál automatikusan naplózza az IP-címet, a látogatás idejét, a megnyitott oldal címét és a böngésző típusát. Ezek az adatok a biztonságos és hibamentes működést szolgálják. Jogalap: jogos érdek, GDPR 6. cikk (1) f) pont. Megőrzési idő: <span class="todo">[a tárhelyszolgáltató szerint, pl. 30 nap]</span>.</p>
 
       <h2 id="sutik">Sütik és helyi tárolás</h2>
-      <p>Az oldal jelenleg <strong>nem használ</strong> statisztikai, marketing- vagy harmadik féltől származó sütit. A betűtípusokat és a képeket saját tárhelyünkről töltjük be, így látogatáskor nem jut adat külső szolgáltatóhoz.</p>
+      <p>A betűtípusokat és a képeket saját tárhelyünkről töltjük be. Marketingcélú sütit (Meta Pixel) <strong>csak a hozzájárulásod után</strong> kapcsolunk be; hozzájárulás nélkül látogatáskor nem jut adat a Metához.</p>
       <div class="tbl">
         <table>
           <thead><tr><th>Név</th><th>Típus</th><th>Cél</th><th>Időtartam</th></tr></thead>
           <tbody>
             <tr><td><code>cupseal-suti</code></td><td>Szükséges (böngésző helyi tárolója)</td><td>A süti-választásod megjegyzése</td><td>12 hónap</td></tr>
+            <tr><td><code>_fbp</code></td><td>Marketing – Meta Pixel (csak hozzájárulással)</td><td>A látogatás és a hirdetési konverziók (pl. ajánlatkérés) mérése, hirdetések célzása</td><td>3 hónap</td></tr>
+            <tr><td><code>fr</code> (facebook.com)</td><td>Marketing – Meta (csak hozzájárulással)</td><td>Hirdetések megjelenítése és mérése a Meta felületein</td><td>3 hónap</td></tr>
           </tbody>
         </table>
       </div>
-      <p>Ha később statisztikai vagy marketingeszközt vezetünk be, azt csak a hozzájárulásod után kapcsoljuk be (GDPR 6. cikk (1) a) pont), és ezt a táblázatot frissítjük. A hozzájárulásodat bármikor módosíthatod vagy visszavonhatod.</p>
+      <p><strong>Meta Pixel.</strong> Ha hozzájárulsz a marketingsütikhez, oldalunk a Meta Platforms Ireland Limited Pixel-kódját tölti be. Ez rögzíti az oldalmegtekintést, sikeres ajánlatkéréskor pedig egy „Lead” (érdeklődés) eseményt, a böngésződ és eszközöd technikai adataival (pl. IP-cím, böngésző típusa) együtt. Ezt a hirdetéseink hatékonyságának mérésére és célzására használjuk. A Pixellel gyűjtött adatok gyűjtése és továbbítása tekintetében a Metával közös adatkezelők vagyunk; az adatok további kezeléséről a <a href="https://www.facebook.com/privacy/policy/" rel="noopener">Meta adatkezelési szabályzata</a> ad tájékoztatást. Jogalap: hozzájárulás, GDPR 6. cikk (1) a) pont. Az ajánlatkérő űrlapon megadott adataidat (név, telefon, e-mail, üzenet) a Pixelnek nem adjuk át.</p>
+      <p>A hozzájárulásodat bármikor módosíthatod vagy visszavonhatod; ez nem érinti a visszavonás előtti adatkezelés jogszerűségét.</p>
       <p><button class="btn line" type="button" data-suti-beallitas>Süti-beállítások megnyitása</button></p>
 
       <h2 id="feldolgozok">Adatfeldolgozók</h2>
@@ -104,7 +107,9 @@
         <table>
           <thead><tr><th>Szolgáltató</th><th>Feladat</th></tr></thead>
           <tbody>
-            <tr><td>Websupport Magyarország Kft. (tarhely.com / mhosting)<br>H-1119 Budapest, Fehérvári út 97–99.<br>info@mhosting.hu · +36 1 700 2323</td><td>A weboldal és az űrlapfeldolgozó üzemeltetése, szervernapló</td></tr>
+            <tr><td>Websupport Magyarország Kft. (tarhely.com / mhosting)<br>H-1119 Budapest, Fehérvári út 97–99.<br>info@mhosting.hu · +36 1 700 2323</td><td>A weboldal üzemeltetése, szervernapló</td></tr>
+            <tr><td>Meta Platforms Ireland Limited<br>Merrion Road, Dublin 4, D04 X2K5, Írország</td><td>Meta Pixel: látogatás- és konverziómérés, hirdetéscélzás (csak marketing-hozzájárulással)</td></tr>
+            <tr><td>FormSubmit (formsubmit.co)</td><td>Az ajánlatkérő űrlap adatainak továbbítása e-mailben, visszaigazoló levél küldése</td></tr>
             <tr><td>Google Ireland Limited (Gmail)<br>Gordon House, Barrow Street, Dublin 4, Írország</td><td>Az ajánlatkérő e-mailek fogadása és tárolása</td></tr>
           </tbody>
         </table>
@@ -202,5 +207,6 @@
 </footer>
 
 <script src="assets/suti.js" defer></script>
+<script src="assets/meta-pixel.js" defer></script>
 </body>
 </html>

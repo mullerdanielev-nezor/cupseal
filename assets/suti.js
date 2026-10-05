@@ -9,7 +9,7 @@
   var KATEGORIAK = [
     { id: 'szukseges', nev: 'Szükséges', leiras: 'Az oldal működéséhez és a süti-választásod megjegyzéséhez kell. Nem kapcsolható ki.', kotelezo: true },
     { id: 'statisztika', nev: 'Statisztika', leiras: 'Névtelen látogatottsági mérés. Jelenleg nem használunk ilyet; ha bevezetjük, csak a hozzájárulásoddal fut.' },
-    { id: 'marketing', nev: 'Marketing', leiras: 'Hirdetések mérése és személyre szabása. Jelenleg nem használunk ilyet; ha bevezetjük, csak a hozzájárulásoddal fut.' }
+    { id: 'marketing', nev: 'Marketing', leiras: 'Meta (Facebook) Pixel: hirdetéseink hatékonyságának mérése és célzása. Csak a hozzájárulásoddal fut.' }
   ];
 
   function olvas() {
