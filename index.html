@@ -161,8 +161,8 @@ header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2p
 /* hero */
 .hero{padding:26px 0 30px}
 /* telefonon: szöveg → gép → CTA és infók; gépen két oszlop, egy képernyőre */
-.hero-grid{display:grid;gap:22px;grid-template-areas:"copy" "stage" "act"}
-.h-copy{grid-area:copy}.h-act{grid-area:act}.hero .stage{grid-area:stage}
+.hero-grid{display:grid;gap:22px;grid-template-areas:"copy" "stage"}
+.h-copy{grid-area:copy}.hero .stage{grid-area:stage}
 .hero .eyebrow{margin-bottom:12px}
 /* telefonon két sor, középre; gépen három sor, balra */
 .hero h1 .dk{display:none}
@@ -170,25 +170,20 @@ header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2p
 .hero .lead .dl{display:none}
 .hero .lead{font-size:clamp(15px,4.4vw,18px);line-height:1.4;margin:8px auto 0;max-width:none}
 .h-copy{text-align:center}
-.hero-price{justify-content:center}
 .hero h1 .b{color:var(--deep)}
 .hero h1 mark{background:none;color:inherit;position:relative;z-index:0;display:inline-block}
 .hero h1 mark::before{content:"";position:absolute;z-index:-1;left:-.08em;right:-.1em;bottom:.02em;height:.42em;background:var(--lemon);border-radius:99px}
 
-.hero-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.hero-price b{font-stretch:62%;font-weight:900;font-size:42px;line-height:1}
-.hero-price span{font-weight:800}
-.cta-row{display:grid;gap:10px}
 /* hero színpad: kivágott gép az ív előtt, felül kilóg belőle */
 .stage{position:relative;margin:0 auto;width:min(100%,460px,calc(66svh * .8));aspect-ratio:4/5;container-type:inline-size}
+/* matcha-paletta a hero mögé */
+.stage{--m-zold:#A8C256;--m-mely:#6F8F2A}
 .stage .sun{position:absolute;right:0;top:4%;width:44%;aspect-ratio:1;border-radius:50%;background:var(--lemon)}
-.stage .q{position:absolute;left:0;bottom:6%;width:34%;aspect-ratio:1;border-radius:0 100% 0 0;background:var(--amber)}
+.stage .q{position:absolute;left:0;bottom:6%;width:34%;aspect-ratio:1;border-radius:0 100% 0 0;background:var(--m-zold)}
 .stage .arch{position:absolute;left:5%;right:5%;top:24%;bottom:6%;border:2px solid var(--line);border-bottom:0;border-radius:999px 999px 0 0;overflow:hidden;
-  background:radial-gradient(circle at 50% 38%,var(--pale) 0 22%,var(--lemon) 22.4% 34%,var(--amber) 34.4% 46%,var(--orange) 46.4%)}
+  background:radial-gradient(circle at 50% 38%,var(--pale) 0 22%,var(--lemon) 22.4% 34%,var(--m-zold) 34.4% 46%,var(--m-mely) 46.4%)}
 .stage .floor{position:absolute;left:0;right:0;bottom:6%;height:2px;background:var(--line);z-index:1}
-.stage .contact{position:absolute;z-index:1;left:28%;right:28%;bottom:calc(6% - 14px);height:30px;border-radius:50%;background:radial-gradient(closest-side,rgba(16,16,20,.55),rgba(16,16,20,0))}
-.stage .termek{position:absolute;z-index:2;height:84%;width:auto;max-width:none;left:50%;bottom:6.2%;transform:translateX(-50%);
-  filter:drop-shadow(0 2px 2px rgba(16,16,20,.35)) drop-shadow(22px 18px 22px rgba(16,16,20,.28))}
+.stage .termek{position:absolute;z-index:2;height:84%;width:auto;max-width:none;left:50%;bottom:6.2%;transform:translateX(-50%)}
 .burst{position:absolute;left:-2cqw;top:30%;width:27cqw;aspect-ratio:1;display:grid;place-items:center;text-align:center;z-index:3;transform:rotate(-9deg);color:var(--ink)}
 .burst::before,.burst::after,.burst b{content:"";position:absolute;inset:11%;background:var(--deep)}
 .burst::before{transform:rotate(30deg)}
@@ -210,12 +205,6 @@ header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2p
 .t7{--a:var(--lemon);--b:var(--orange)}.t7::before{border-radius:50% 50% 0 0;inset:50% 0 0 0!important}
 .t8{--a:var(--ink);--b:var(--deep)}.t8::before{border-radius:50%;inset:22%!important}
 
-/* tények */
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
-.facts div{border:2px solid var(--line);border-radius:14px;padding:9px 11px 8px}
-.facts b{display:block;font-stretch:62%;font-weight:900;font-size:21px;line-height:1.05}
-.facts span{font-size:12.5px;font-weight:600;line-height:1.3;display:block}
-.facts div:nth-child(1){background:var(--lemon)}.facts div:nth-child(4){background:var(--orange)}
 
 /* felhasználás */
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
@@ -335,8 +324,6 @@ footer{background:var(--ink);color:var(--white)}
   :root{--pad:28px}
   body{font-size:18px}
   section{padding:96px 0}
-  .cta-row{display:flex}
-  .facts{grid-template-columns:repeat(4,1fr)}
   .grid2{grid-template-columns:1fr 1fr;gap:24px}
   .tiles{grid-template-columns:repeat(8,1fr)}
   .tiles i:nth-child(n+5){display:block}
@@ -361,13 +348,12 @@ footer{background:var(--ink);color:var(--white)}
   .logo img{height:42px}
   .nav .btn{display:inline-flex}
   .hero{padding:24px 0;min-height:calc(100svh - 68px);display:flex;align-items:center}
-  .hero-grid{grid-template-columns:1fr 1fr;grid-template-areas:"copy stage" "act stage";column-gap:32px;row-gap:24px;align-items:center}
-  .h-copy{align-self:end;text-align:left}.h-act{align-self:start}
+  .hero-grid{grid-template-columns:1fr 1fr;grid-template-areas:"copy stage";column-gap:32px;row-gap:24px;align-items:center}
+  .h-copy{align-self:center;text-align:left}
   .hero h1 .dk{display:inline}.hero h1 .mb{display:none}
   .hero h1{letter-spacing:.005em;margin-inline:0}
   .hero .lead .dl{display:inline}.hero .lead .mb{display:none}
   .hero .lead{margin-inline:0;max-width:36ch}
-  .hero-price{justify-content:flex-start}
   h1.disp{font-size:clamp(64px,min(6.4vw,10.5svh),104px)}
   .hero .lead{font-size:18px;margin-top:16px}
   .hero .stage{width:min(100%,640px,calc((100svh - 100px) * .8))}
@@ -404,21 +390,8 @@ footer{background:var(--ink);color:var(--white)}
       <p class="lead"><span class="ml">Betöltöd, a gép lezárja.<br class="mb"> Italokhoz, desszertekhez, elvitelre.</span><span class="dl"> Elektromos, automatikus zárás italüzleteknek és vendéglátóhelyeknek, fehér vagy fekete gépházzal.</span></p>
     </div>
     <div class="stage">
-      <span class="sun"></span><span class="q"></span><span class="arch"></span><span class="floor"></span><span class="contact"></span>
+      <span class="sun"></span><span class="q"></span><span class="arch"></span><span class="floor"></span>
       <img class="termek" src="kepek-webp/matcha-lezart-doboz.png" width="511" height="1100" alt="Jeges matcha latte lezárt, fémfedeles PET dobozban" fetchpriority="high">
-    </div>
-    <div class="h-act">
-      <div class="hero-price"><b>450 000 Ft</b><span>+ ÁFA</span></div>
-      <div class="cta-row">
-        <a class="btn" href="#ajanlat">Ajánlatot kérek ↗</a>
-        <a class="btn line" href="#gep" data-reszletek="feher">Műszaki adatok</a>
-      </div>
-      <div class="facts">
-        <div><b>Automata</b><span>emelőtalp és zárás</span></div>
-        <div><b>220 V</b><span>pultra tehető</span></div>
-        <div><b>210–1000 ml</b><span>adaptercserével</span></div>
-        <div><b>2 szín</b><span>fehér vagy fekete</span></div>
-      </div>
     </div>
   </div>
 </section>
