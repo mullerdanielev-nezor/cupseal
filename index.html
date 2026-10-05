@@ -189,11 +189,6 @@ header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2p
 .stage .contact{position:absolute;z-index:1;left:24%;right:20%;bottom:calc(6% - 14px);height:30px;border-radius:50%;background:radial-gradient(closest-side,rgba(16,16,20,.55),rgba(16,16,20,0))}
 .stage .machine{position:absolute;z-index:2;height:86%;width:auto;max-width:none;left:50%;bottom:6.4%;transform:translateX(-47%);
   filter:drop-shadow(0 2px 2px rgba(16,16,20,.35)) drop-shadow(22px 18px 22px rgba(16,16,20,.28))}
-.stage .tag{position:absolute;z-index:3;background:var(--white);border:2px solid var(--ink);border-radius:99px;padding:.45em .95em;font-weight:900;font-size:clamp(11px,3.3cqw,14px);line-height:1.2;box-shadow:3px 3px 0 var(--ink);white-space:nowrap;animation:lebeg 5s ease-in-out infinite}
-.stage .tag.t-a{right:-4px;top:30%;background:var(--lemon)}
-.stage .tag.t-b{left:-4px;bottom:20%;animation-delay:-2.5s}
-@keyframes lebeg{50%{transform:translateY(-6px)}}
-@media (prefers-reduced-motion:reduce){.stage .tag{animation:none}}
 .burst{position:absolute;left:-2cqw;top:30%;width:27cqw;aspect-ratio:1;display:grid;place-items:center;text-align:center;z-index:3;transform:rotate(-9deg);color:var(--ink)}
 .burst::before,.burst::after,.burst b{content:"";position:absolute;inset:11%;background:var(--deep)}
 .burst::before{transform:rotate(30deg)}
@@ -231,7 +226,17 @@ header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2p
 /* gépek */
 .grid2{display:grid;gap:16px;margin-top:28px}
 .machine{display:grid;gap:14px;padding:0}
-.machine .shot{aspect-ratio:1;border-bottom:2px solid var(--line);overflow:hidden;background:#F2F2F4}
+.machine .shot{position:relative;aspect-ratio:1;border-bottom:2px solid var(--line);overflow:hidden;background:var(--pale)}
+.machine .s-sun{position:absolute;right:9%;top:9%;width:28%;aspect-ratio:1;border-radius:50%;background:var(--lemon)}
+.machine .s-arch{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);width:62%;height:70%;border:2px solid var(--line);border-bottom:0;border-radius:999px 999px 0 0;
+  background:radial-gradient(circle at 50% 40%,var(--white) 0 20%,var(--lemon) 20.4% 32%,var(--amber) 32.4% 44%,var(--orange) 44.4%)}
+.machine .s-floor{position:absolute;left:8%;right:8%;bottom:9%;height:2px;background:var(--line);z-index:1}
+.machine .s-contact{position:absolute;z-index:1;left:50%;transform:translateX(-50%);bottom:calc(9% - 12px);width:46%;height:24px;border-radius:50%;background:radial-gradient(closest-side,rgba(16,16,20,.5),rgba(16,16,20,0))}
+.machine .s-gep{position:absolute;z-index:2;left:50%;bottom:9.3%;height:80%;width:auto;max-width:none;transform:translateX(-47%);transition:transform .35s ease;
+  filter:drop-shadow(0 2px 2px rgba(16,16,20,.35)) drop-shadow(16px 12px 16px rgba(16,16,20,.26))}
+@media (hover:hover){.machine .shot:hover .s-gep{transform:translateX(-47%) translateY(-6px)}}
+.machine:nth-child(2) .shot{background:#EDEDF0}
+.machine:nth-child(2) .s-sun{background:var(--deep)}
 .machine .in{padding:4px 20px 22px;display:grid;gap:12px}
 .machine h3{font-stretch:62%;font-size:34px;text-transform:uppercase;line-height:.95}
 .sw{display:inline-block;width:18px;height:18px;border-radius:50%;border:2px solid var(--ink);vertical-align:-2px;margin-right:6px}
@@ -401,8 +406,6 @@ footer{background:var(--ink);color:var(--white)}
     <div class="stage">
       <span class="sun"></span><span class="q"></span><span class="arch"></span><span class="floor"></span><span class="contact"></span>
       <img class="machine" src="kepek-webp/dobozzaro-gep-feher-kivagott.webp" width="609" height="1000" alt="Fehér CupSeal Automatic dobozzáró gép" fetchpriority="high">
-      <span class="tag t-a">220 V · pultra</span>
-      <span class="tag t-b">210–1000 ml</span>
       <div class="burst"><b></b><span>1 év<small>GARANCIA</small></span></div>
     </div>
     <div class="h-act">
@@ -431,7 +434,7 @@ footer{background:var(--ink);color:var(--white)}
     </div>
     <div class="grid2">
       <article class="card machine">
-        <div class="shot" data-reszletek="feher" role="button" tabindex="0" aria-label="Fehér gép részletei"><img class="cover" src="kepek-webp/dobozzaro-gep-feher-dobd-fel-a-csomagolast.webp" width="1254" height="1254" alt="Fehér CupSeal dobozzáró gép – Dobd fel a csomagolást!" loading="lazy" decoding="async"></div>
+        <div class="shot" data-reszletek="feher" role="button" tabindex="0" aria-label="Fehér gép részletei"><span class="s-sun"></span><span class="s-arch"></span><span class="s-floor"></span><span class="s-contact"></span><img class="s-gep" src="kepek-webp/dobozzaro-gep-feher-kivagott.webp" width="609" height="1000" alt="Fehér CupSeal Automatic dobozzáró gép" loading="lazy" decoding="async"></div>
         <div class="in">
           <h3>CupSeal Automatic</h3>
           <p><span class="sw" style="background:#fff"></span><strong>Fehér.</strong> Automatikus emelőtalp, stabil zárás, digitális vezérlés.</p>
@@ -440,7 +443,7 @@ footer{background:var(--ink);color:var(--white)}
         </div>
       </article>
       <article class="card machine">
-        <div class="shot" data-reszletek="fekete" role="button" tabindex="0" aria-label="Fekete gép részletei"><img class="cover" src="kepek-webp/dobozzaro-gep-fekete-feketeben-is-van.webp" width="1254" height="1254" alt="Fekete CupSeal dobozzáró gép matcha itallal – Feketében is van!" loading="lazy" decoding="async"></div>
+        <div class="shot" data-reszletek="fekete" role="button" tabindex="0" aria-label="Fekete gép részletei"><span class="s-sun"></span><span class="s-arch"></span><span class="s-floor"></span><span class="s-contact"></span><img class="s-gep" src="kepek-webp/dobozzaro-gep-fekete-kivagott.webp" width="608" height="1000" alt="Fekete CupSeal Automatic dobozzáró gép" loading="lazy" decoding="async"></div>
         <div class="in">
           <h3>CupSeal Automatic</h3>
           <p><span class="sw" style="background:#101014"></span><strong>Fekete.</strong> Azonos professzionális kivitel, látványos pultgép vendéglátóhelyekre.</p>
