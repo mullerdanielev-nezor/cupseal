@@ -248,9 +248,9 @@ header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2p
 /* árlista */
 .plist{margin-top:32px;display:grid;gap:12px}
 .pgroup{border:2px solid var(--line);border-radius:18px;background:var(--white);overflow:hidden}
-.pgroup summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:96px 1fr 38px;grid-template-areas:"thumb title btn" "thumb price btn";column-gap:16px;row-gap:4px;align-items:center;padding:12px 16px 12px 12px}
+.pgroup summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:clamp(72px,24vw,96px) minmax(0,1fr) 38px;grid-template-areas:"thumb title btn" "thumb price btn";column-gap:16px;row-gap:4px;align-items:center;padding:12px 16px 12px 12px}
 .pgroup summary .pthumb{grid-area:thumb}
-.pgroup summary .pt{grid-area:title;align-self:end;font-weight:800;font-size:17.5px;line-height:1.2;display:flex;align-items:flex-start;gap:8px}
+.pgroup summary .pt{grid-area:title;align-self:end;min-width:0;overflow-wrap:anywhere;hyphens:auto;font-weight:800;font-size:17.5px;line-height:1.2;display:flex;align-items:flex-start;gap:8px}
 .pgroup summary .pt::before{content:"";flex:none;width:12px;height:12px;margin-top:.3em;border-radius:4px;background:var(--k)}
 .pgroup summary small{grid-area:price;align-self:start;font-size:14.5px;font-weight:700;color:#55555c}
 .pthumb{position:relative;display:block;aspect-ratio:1;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:var(--white);cursor:zoom-in}
@@ -341,7 +341,7 @@ footer{background:var(--ink);color:var(--white)}
   .tiles{grid-template-columns:repeat(8,1fr)}
   .tiles i:nth-child(n+5){display:block}
   .plist{grid-template-columns:1fr 1fr;align-items:start;gap:16px}
-  .pgroup summary{grid-template-columns:1fr 42px;grid-template-areas:"thumb thumb" "title btn" "price btn";padding:0 20px 18px;row-gap:4px}
+  .pgroup summary{grid-template-columns:minmax(0,1fr) 42px;grid-template-areas:"thumb thumb" "title btn" "price btn";padding:0 20px 18px;row-gap:4px}
   .pgroup summary .pthumb{aspect-ratio:3/2;margin:0 -20px 16px;border:0;border-bottom:2px solid var(--line);border-radius:0}
   .pgroup summary .pthumb img{object-position:50% 50%!important}
   .pgroup summary .pthumb i{width:34px;height:34px;font-size:16px;right:12px;bottom:12px}
