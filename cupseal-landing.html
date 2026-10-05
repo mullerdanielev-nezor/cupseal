@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CUP SEAL – automata pohár- és PET dobozzáró gép</title>
+<meta name="description" content="Automata dobozzáró gép vendéglátóhelyeknek: 450 000 Ft + ÁFA, 1 év garancia, próbazárás a választott dobozzal. Kérj ajánlatot.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="kepek-webp/dobozzaro-gep-feher-kivagott.webp" as="image" type="image/webp">
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+/* Paletta: fehér alap + citrom → narancs árnyalatok */
+:root{
+  --ink:#101014; --white:#fff; --line:#101014;
+  --pale:#FFF6B8; --lemon:#FFE81A; --amber:#FFBE0B; --orange:#FF8A00; --deep:#F0540A;
+  --r:24px; --pad:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;-webkit-text-size-adjust:100%}
+body{font-family:Archivo,system-ui,sans-serif;font-size:17px;line-height:1.45;color:var(--ink);background:var(--white);overflow-x:clip;padding-bottom:calc(74px + env(safe-area-inset-bottom))}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{width:min(1180px,100% - 2*var(--pad));margin-inline:auto}
+section{padding:64px 0;scroll-margin-top:64px}
+.disp{font-family:Anton,Archivo,sans-serif;font-weight:400;text-transform:uppercase;line-height:1.14;letter-spacing:.005em}
+h1.disp{font-size:clamp(40px,15vw,80px)}
+h2.disp{font-size:clamp(50px,13.5vw,150px);margin-bottom:14px}
+h3{font-size:22px;font-weight:900;line-height:1.1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.eyebrow::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--k,var(--orange))}
+.lead{font-size:19px;font-weight:500;max-width:36ch}
+.note{font-size:13.5px;color:#55555c;margin-top:20px;max-width:78ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;font:inherit;font-weight:800;font-size:18px;text-decoration:none;background:var(--orange);color:var(--ink);border:2px solid var(--ink);border-radius:99px;padding:12px 26px;cursor:pointer}
+.btn:active{transform:scale(.97)}
+.btn.line{background:var(--white);color:var(--ink);border-color:var(--ink)}
+.card{position:relative;overflow:hidden;border:2px solid var(--line);border-radius:var(--r);background:var(--white);padding:20px}
+
+/* képhelyek */
+.ph{position:relative;display:grid;place-items:center;overflow:hidden;background:repeating-linear-gradient(135deg,rgba(16,16,20,.1) 0 2px,transparent 2px 14px),var(--c,#F1F1F3)}
+.ph::after{content:"KÉP · " attr(data-label);font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--white);border:2px solid var(--ink);border-radius:8px;padding:5px 8px;max-width:80%;text-align:center}
+
+/* középre igazított szekciócímek */
+.head{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:980px;margin-inline:auto}
+.head .eyebrow{margin-bottom:20px}
+.head .eyebrow::after{content:"";width:14px;height:14px;border-radius:50%;background:var(--k,var(--orange))}
+.head h2.disp{margin-bottom:0;text-wrap:balance}
+.head h2.disp::after{content:"";display:block;width:108px;height:10px;margin:26px auto 0;border-radius:99px;background:linear-gradient(90deg,var(--lemon) 0 33.3%,var(--orange) 33.3% 66.6%,var(--deep) 66.6%)}
+.head .lead{margin:24px auto 0;text-wrap:pretty}
+.head .chips{justify-content:center}
+
+/* fotók */
+.cover{width:100%;height:100%;object-fit:cover}
+
+/* egysoros szekciócím (telefonon is kifér) */
+h2.disp.egysor{white-space:nowrap;font-size:clamp(32px,12.5vw,120px)}
+
+/* gépkártya gombok */
+.m-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.m-actions .btn{padding-inline:14px}
+.machine .shot{cursor:zoom-in}
+
+/* részletek felugró ablak */
+dialog.modal{padding:0;margin:auto;border:2px solid var(--ink);border-radius:28px;width:min(1060px,calc(100% - 20px));max-width:none;max-height:calc(100dvh - 20px);overflow:hidden;background:var(--white);color:var(--ink);box-shadow:8px 8px 0 var(--ink)}
+dialog.modal::backdrop{background:rgba(16,16,20,.6);backdrop-filter:blur(3px)}
+dialog.modal[open]{animation:mfel .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes mfel{from{opacity:0;transform:translateY(24px) scale(.97)}}
+.m-in{position:relative;display:grid;max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain}
+.m-close{position:absolute;z-index:6;top:12px;right:12px;width:46px;height:46px;border-radius:50%;border:2px solid var(--ink);background:var(--white);font:900 18px/1 Archivo,sans-serif;cursor:pointer;display:grid;place-items:center;box-shadow:3px 3px 0 var(--ink)}
+.m-close:hover{background:var(--ink);color:var(--white)}
+.m-art{position:relative;height:clamp(260px,44vh,360px);background:var(--pale);border-bottom:2px solid var(--ink);overflow:hidden;container-type:inline-size}
+.m-sun{position:absolute;right:8%;top:8%;width:30%;aspect-ratio:1;border-radius:50%;background:var(--lemon)}
+.m-arch{position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:min(62%,300px);height:78%;border:2px solid var(--ink);border-bottom:0;border-radius:999px 999px 0 0;background:radial-gradient(circle at 50% 38%,var(--white) 0 22%,var(--lemon) 22.4% 34%,var(--amber) 34.4% 46%,var(--orange) 46.4%)}
+.m-floor{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--ink);z-index:1}
+.m-contact{position:absolute;z-index:1;left:50%;transform:translateX(-50%);bottom:-12px;width:min(48%,240px);height:26px;border-radius:50%;background:radial-gradient(closest-side,rgba(16,16,20,.5),rgba(16,16,20,0))}
+.m-gep{position:absolute;z-index:2;left:50%;bottom:2px;height:92%;width:auto;max-width:none;transform:translateX(-46%);filter:drop-shadow(0 2px 2px rgba(16,16,20,.35)) drop-shadow(18px 14px 18px rgba(16,16,20,.28))}
+.m-art .burst{left:4%;top:10%;width:clamp(84px,20cqw,120px)}
+.m-art .burst span{font-size:clamp(18px,4.2cqw,25px)}
+.m-art .burst small{font-size:clamp(8px,1.9cqw,11px)}
+.m-body{padding:24px 20px 26px}
+.m-body h2{font-size:clamp(34px,8vw,54px);line-height:1.08;margin-bottom:10px}
+.m-body h2 em{font-style:normal;color:var(--deep)}
+.m-price{display:flex;align-items:baseline;gap:8px;margin-bottom:18px}
+.m-price b{font-stretch:62%;font-weight:900;font-size:36px;line-height:1}
+.m-price span{font-weight:800}
+.m-tabs{display:flex;gap:6px;padding:4px;border:2px solid var(--ink);border-radius:99px;width:max-content;max-width:100%;margin-bottom:6px}
+.m-tabs button{font:inherit;font-weight:800;font-size:14.5px;border:0;border-radius:99px;padding:8px 14px;background:transparent;color:var(--ink);cursor:pointer}
+.m-tabs button[aria-selected="true"]{background:var(--ink);color:var(--white)}
+.m-tabs button:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+.m-spec div{display:grid;grid-template-columns:42% 1fr;gap:10px;padding:10px 0;border-bottom:2px solid #E4E4E8;font-size:15.5px}
+.m-spec dt{font-weight:800}
+.m-perks{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
+.m-perks li{position:relative;border:2px solid var(--ink);border-radius:16px;padding:10px 12px 10px 34px;line-height:1.25}
+.m-perks li::before{content:"";position:absolute;left:11px;top:13px;width:14px;height:14px;border-radius:50%;background:var(--k)}
+.m-perks b{display:block;font-size:14.5px}
+.m-perks span{font-size:12.5px;color:#55555c}
+.m-info{margin-top:16px;border:2px solid var(--ink);border-radius:16px;overflow:hidden}
+.m-info summary{cursor:pointer;padding:12px 16px;font-weight:800;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.m-info summary::-webkit-details-marker{display:none}
+.m-info summary::after{content:"+";font-size:22px;line-height:1}
+.m-info[open] summary::after{content:"–"}
+.m-info img{border-top:2px solid var(--ink);width:100%;height:auto}
+.m-body .note{margin-top:14px}
+.m-cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+@media (min-width:860px){
+  .m-in{grid-template-columns:.9fr 1.1fr;height:min(720px,calc(100dvh - 24px));overflow:hidden}
+  .m-art{height:100%;border-bottom:0;border-right:2px solid var(--ink)}
+  .m-arch{height:62%;width:72%}
+  .m-gep{height:78%}
+  .m-sun{top:12%}
+  .m-body{overflow-y:auto;overscroll-behavior:contain;padding:34px 34px 30px}
+  .m-art .burst{top:22%}
+}
+@media (prefers-reduced-motion:reduce){dialog.modal[open]{animation:none}}
+
+/* képnagyító */
+dialog.lightbox{padding:0;margin:auto;border:2px solid var(--ink);border-radius:24px;background:var(--white);width:fit-content;max-width:calc(100% - 20px);max-height:calc(100dvh - 20px);overflow:hidden;box-shadow:8px 8px 0 var(--ink)}
+dialog.lightbox::backdrop{background:rgba(16,16,20,.7);backdrop-filter:blur(3px)}
+dialog.lightbox[open]{animation:mfel .25s cubic-bezier(.2,.8,.2,1)}
+.lightbox figure{display:grid;max-height:calc(100dvh - 24px)}
+.lightbox img{width:auto;max-width:min(1100px,calc(100vw - 24px));max-height:calc(100dvh - 80px);object-fit:contain;margin:auto}
+.lightbox figcaption{border-top:2px solid var(--ink);padding:12px 60px 12px 18px;font-weight:800}
+.lightbox .m-close{top:auto;bottom:4px;right:6px;width:40px;height:40px;box-shadow:none}
+
+/* lapozható körhinta */
+.car-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;margin-top:36px}
+.car-track::-webkit-scrollbar{display:none}
+.car-track:focus-visible{outline:4px solid var(--orange);outline-offset:4px;border-radius:var(--r)}
+.slide{position:relative;flex:none;height:clamp(220px,57vw,300px);scroll-snap-align:start;aspect-ratio:3/2;overflow:hidden;border:2px solid var(--line);border-radius:var(--r);background:var(--pale)}
+.slide.p{aspect-ratio:2/3}
+.slide figcaption{position:absolute;left:12px;bottom:12px;background:var(--white);border:2px solid var(--ink);border-radius:99px;padding:5px 14px;font-weight:800;font-size:13.5px;line-height:1.2}
+.car-nav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
+.car-btn{flex:none;width:52px;height:52px;border-radius:50%;border:2px solid var(--ink);background:var(--white);color:var(--ink);font:900 22px/1 Archivo,sans-serif;cursor:pointer;display:grid;place-items:center}
+.car-btn.next{background:var(--orange)}
+.car-btn:disabled{opacity:.3;cursor:default}
+.car-btn:focus-visible{outline:4px solid var(--orange);outline-offset:2px}
+.car-dots{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:60vw}
+.car-dots button{width:10px;height:10px;padding:0;border-radius:99px;border:2px solid var(--ink);background:transparent;cursor:pointer;transition:width .25s,background .25s}
+.car-dots button[aria-current="true"]{width:28px;background:var(--ink)}
+@media (min-width:700px){.slide{height:340px}}
+@media (min-width:980px){.slide{height:400px}.car-btn:hover:not(:disabled){background:var(--ink);color:var(--white)}}
+
+
+/* tartozékképek */
+
+/* fejléc */
+header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2px solid var(--line)}
+.nav{display:flex;align-items:center;gap:24px;height:60px}
+.logo{display:flex;align-items:center;flex:none;text-decoration:none}
+.logo img{display:block;height:34px;width:auto}
+.nav nav{display:none;gap:24px;margin-left:auto}
+.ship{display:inline-flex;align-items:center;gap:6px;margin-left:auto;padding:5px 11px 5px 8px;border:2px solid var(--ink);border-radius:99px;background:var(--lemon);font-weight:800;font-size:12.5px;line-height:1.1;white-space:nowrap}
+.ship svg{flex:none}
+.nav nav a{text-decoration:none;font-weight:700;font-size:16px}
+.nav .btn{display:none;min-height:42px;padding:6px 18px;font-size:15px}
+
+/* hero */
+.hero{padding:26px 0 30px}
+/* telefonon: szöveg → gép → CTA és infók; gépen két oszlop, egy képernyőre */
+.hero-grid{display:grid;gap:22px;grid-template-areas:"copy" "stage" "act"}
+.h-copy{grid-area:copy}.h-act{grid-area:act}.hero .stage{grid-area:stage}
+.hero .eyebrow{margin-bottom:12px}
+/* telefonon két sor, középre; gépen három sor, balra */
+.hero h1 .dk{display:none}
+.hero h1{letter-spacing:-.01em;margin-inline:-8px}
+.hero .lead .dl{display:none}
+.hero .lead{font-size:clamp(15px,4.4vw,18px);line-height:1.4;margin:8px auto 0;max-width:none}
+.h-copy{text-align:center}
+.hero-price{justify-content:center}
+.hero h1 .b{color:var(--deep)}
+.hero h1 mark{background:none;color:inherit;position:relative;z-index:0;display:inline-block}
+.hero h1 mark::before{content:"";position:absolute;z-index:-1;left:-.08em;right:-.1em;bottom:.02em;height:.42em;background:var(--lemon);border-radius:99px}
+
+.hero-price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.hero-price b{font-stretch:62%;font-weight:900;font-size:42px;line-height:1}
+.hero-price span{font-weight:800}
+.cta-row{display:grid;gap:10px}
+/* hero színpad: kivágott gép az ív előtt, felül kilóg belőle */
+.stage{position:relative;margin:0 auto;width:min(100%,460px,calc(66svh * .8));aspect-ratio:4/5;container-type:inline-size}
+.stage .sun{position:absolute;right:0;top:4%;width:44%;aspect-ratio:1;border-radius:50%;background:var(--lemon)}
+.stage .q{position:absolute;left:0;bottom:6%;width:34%;aspect-ratio:1;border-radius:0 100% 0 0;background:var(--amber)}
+.stage .arch{position:absolute;left:5%;right:5%;top:24%;bottom:6%;border:2px solid var(--line);border-bottom:0;border-radius:999px 999px 0 0;overflow:hidden;
+  background:radial-gradient(circle at 50% 38%,var(--pale) 0 22%,var(--lemon) 22.4% 34%,var(--amber) 34.4% 46%,var(--orange) 46.4%)}
+.stage .floor{position:absolute;left:0;right:0;bottom:6%;height:2px;background:var(--line);z-index:1}
+.stage .contact{position:absolute;z-index:1;left:24%;right:20%;bottom:calc(6% - 14px);height:30px;border-radius:50%;background:radial-gradient(closest-side,rgba(16,16,20,.55),rgba(16,16,20,0))}
+.stage .machine{position:absolute;z-index:2;height:86%;width:auto;max-width:none;left:50%;bottom:6.4%;transform:translateX(-47%);
+  filter:drop-shadow(0 2px 2px rgba(16,16,20,.35)) drop-shadow(22px 18px 22px rgba(16,16,20,.28))}
+.stage .tag{position:absolute;z-index:3;background:var(--white);border:2px solid var(--ink);border-radius:99px;padding:.45em .95em;font-weight:900;font-size:clamp(11px,3.3cqw,14px);line-height:1.2;box-shadow:3px 3px 0 var(--ink);white-space:nowrap;animation:lebeg 5s ease-in-out infinite}
+.stage .tag.t-a{right:-4px;top:30%;background:var(--lemon)}
+.stage .tag.t-b{left:-4px;bottom:20%;animation-delay:-2.5s}
+@keyframes lebeg{50%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){.stage .tag{animation:none}}
+.burst{position:absolute;left:-2cqw;top:30%;width:27cqw;aspect-ratio:1;display:grid;place-items:center;text-align:center;z-index:3;transform:rotate(-9deg);color:var(--ink)}
+.burst::before,.burst::after,.burst b{content:"";position:absolute;inset:11%;background:var(--deep)}
+.burst::before{transform:rotate(30deg)}
+.burst::after{transform:rotate(60deg)}
+.burst span{position:relative;z-index:1;font-stretch:62%;font-weight:900;font-size:5.4cqw;line-height:.95}
+.burst small{display:block;font-stretch:100%;font-size:2.4cqw;font-weight:800;letter-spacing:.05em}
+
+/* formasor */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr)}
+.tiles i{aspect-ratio:1;position:relative;background:var(--a);overflow:hidden}
+.tiles i::before{content:"";position:absolute;inset:0;background:var(--b)}
+.tiles i:nth-child(n+5){display:none}
+.t1{--a:var(--lemon);--b:var(--deep)}.t1::before{border-radius:0 0 100% 0}
+.t2{--a:var(--white);--b:var(--orange)}.t2::before{border-radius:50%;inset:14%!important}
+.t3{--a:var(--amber);--b:var(--ink)}.t3::before{border-radius:999px 999px 0 0;inset:28% 18% 0 18%!important}
+.t4{--a:var(--deep);--b:var(--lemon)}.t4::before{border-radius:100% 0 0 0}
+.t5{--a:var(--orange);--b:var(--white)}.t5::before{border-radius:99px;inset:36% 10%!important}
+.t6{--a:var(--white);--b:var(--amber)}.t6::before{border-radius:0 100% 0 100%}
+.t7{--a:var(--lemon);--b:var(--orange)}.t7::before{border-radius:50% 50% 0 0;inset:50% 0 0 0!important}
+.t8{--a:var(--ink);--b:var(--deep)}.t8::before{border-radius:50%;inset:22%!important}
+
+/* tények */
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+.facts div{border:2px solid var(--line);border-radius:14px;padding:9px 11px 8px}
+.facts b{display:block;font-stretch:62%;font-weight:900;font-size:21px;line-height:1.05}
+.facts span{font-size:12.5px;font-weight:600;line-height:1.3;display:block}
+.facts div:nth-child(1){background:var(--lemon)}.facts div:nth-child(4){background:var(--orange)}
+
+/* felhasználás */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chips span{border:2px solid var(--ink);border-radius:99px;padding:8px 16px;font-weight:800;font-size:16px}
+.chips span:nth-child(4n+1){background:var(--lemon)}
+.chips span:nth-child(4n+3){background:var(--ink);color:var(--white)}
+
+/* gépek */
+.grid2{display:grid;gap:16px;margin-top:28px}
+.machine{display:grid;gap:14px;padding:0}
+.machine .shot{aspect-ratio:1;border-bottom:2px solid var(--line);overflow:hidden;background:#F2F2F4}
+.machine .in{padding:4px 20px 22px;display:grid;gap:12px}
+.machine h3{font-stretch:62%;font-size:34px;text-transform:uppercase;line-height:.95}
+.sw{display:inline-block;width:18px;height:18px;border-radius:50%;border:2px solid var(--ink);vertical-align:-2px;margin-right:6px}
+.price{font-stretch:62%;font-weight:900;font-size:46px;line-height:1}
+.price small{font-size:.4em;font-stretch:100%;font-weight:800}
+
+
+
+/* árlista */
+.plist{margin-top:32px;display:grid;gap:12px}
+.pgroup{border:2px solid var(--line);border-radius:18px;background:var(--white);overflow:hidden}
+.pgroup summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:96px 1fr 38px;grid-template-areas:"thumb title btn" "thumb price btn";column-gap:16px;row-gap:4px;align-items:center;padding:12px 16px 12px 12px}
+.pgroup summary .pthumb{grid-area:thumb}
+.pgroup summary .pt{grid-area:title;align-self:end;font-weight:800;font-size:17.5px;line-height:1.2;display:flex;align-items:flex-start;gap:8px}
+.pgroup summary .pt::before{content:"";flex:none;width:12px;height:12px;margin-top:.3em;border-radius:4px;background:var(--k)}
+.pgroup summary small{grid-area:price;align-self:start;font-size:14.5px;font-weight:700;color:#55555c}
+.pthumb{position:relative;display:block;aspect-ratio:1;border:2px solid var(--line);border-radius:12px;overflow:hidden;background:var(--white);cursor:zoom-in}
+.pthumb img{width:100%;height:100%;object-fit:cover}
+.pthumb i{position:absolute;right:5px;bottom:5px;width:24px;height:24px;display:grid;place-items:center;border-radius:50%;background:var(--white);border:2px solid var(--ink);font-style:normal;font-size:12px;font-weight:900;line-height:1}
+.pthumb:focus-visible{outline:4px solid var(--orange);outline-offset:2px}
+.pgroup summary::-webkit-details-marker{display:none}
+.pgroup summary::after{grid-area:btn;content:"+";flex:none;display:grid;place-items:center;width:38px;height:38px;border:2px solid var(--ink);border-radius:50%;font-size:20px;font-weight:900;line-height:1}
+.pgroup[open] summary{background:var(--pale);border-bottom:2px solid var(--line)}
+.pgroup[open] summary::after{content:"–";background:var(--ink);color:var(--white)}
+.pgroup summary:focus-visible{outline:4px solid var(--orange);outline-offset:-4px}
+.pgroup .rows{padding:4px 20px 8px}
+.pgroup .row:last-child{border-bottom:0}
+.row{display:flex;align-items:baseline;gap:10px;padding:11px 0;border-bottom:2px solid #E4E4E8}
+.row span{font-weight:600}
+.row i{flex:1;border-bottom:2px dotted #BDBDC6;transform:translateY(-4px)}
+.row b{font-stretch:62%;font-weight:900;font-size:26px;white-space:nowrap}
+.row small{font-size:12px;font-weight:700}
+
+
+/* űrlap */
+#ajanlat{border-top:2px solid var(--line)}
+.form-grid{display:grid;gap:28px}
+form{display:grid;gap:14px;padding:20px}
+form label{display:grid;gap:6px;font-weight:800;font-size:14.5px}
+input,select,textarea{font:inherit;font-size:17px;min-height:52px;padding:12px 14px;border:2px solid var(--ink);border-radius:14px;background:var(--white);color:var(--ink);width:100%}
+input:focus,select:focus,textarea:focus{outline:4px solid var(--orange);outline-offset:1px}
+fieldset{border:0;display:flex;flex-wrap:wrap;gap:8px}
+legend{font-weight:800;font-size:14.5px;margin-bottom:8px}
+.chip{position:relative;display:block}
+.chip input{position:absolute;opacity:0;inset:0;min-height:0;cursor:pointer}
+.chip span{display:block;border:2px solid var(--ink);border-radius:99px;padding:10px 18px;font-weight:800;font-size:16px}
+.chip input:checked + span{background:var(--ink);color:var(--white)}
+.chip input:focus-visible + span{outline:4px solid var(--orange)}
+form .btn{width:100%;font-size:20px;min-height:60px}
+form .btn[disabled]{opacity:.6;cursor:progress}
+form label.consent{display:flex;align-items:flex-start;gap:12px;font-weight:600;font-size:15px;line-height:1.4}
+.consent input{width:24px;height:24px;min-height:0;flex:none;margin-top:1px;padding:0;accent-color:var(--deep)}
+.consent a{font-weight:800}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+[aria-invalid="true"]{border-color:var(--deep)!important;background:#FFF1EA}
+.form-msg{border:2px solid var(--ink);border-radius:14px;padding:12px 16px;font-weight:700}
+.form-msg.hiba{background:#FFE2D3}
+.form-done{text-align:center;display:grid;justify-items:center;gap:14px;padding:44px 24px;background:var(--pale)}
+.form-done h3{font-family:Anton,Archivo,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(36px,8vw,56px);line-height:1.1}
+.form-done .ok{width:72px;height:72px;border-radius:50%;background:var(--lemon);border:2px solid var(--ink);display:grid;place-items:center;font-size:36px;font-weight:900}
+.form-done[hidden],form[hidden]{display:none}
+.form-grid .form-done{width:min(880px,100%);margin-inline:auto}
+
+/* lábléc */
+footer{background:var(--ink);color:var(--white)}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px 24px;padding:52px 0 28px}
+.f-brand{grid-column:1/-1}
+.f-logo{display:inline-flex;background:var(--white);border-radius:18px;padding:12px 18px;box-shadow:5px 5px 0 var(--orange)}
+.f-logo img{height:54px}
+.f-tag{color:#C9C9D1;font-size:16px;max-width:34ch;margin:16px 0 22px}
+.f-col{display:flex;flex-direction:column;align-items:flex-start;gap:11px}
+.f-col h3{font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--lemon);margin-bottom:3px}
+.f-col a,.f-col span{color:var(--white);font-weight:600;font-size:15.5px;line-height:1.3;text-decoration:none}
+.f-col a{border-bottom:2px solid transparent}
+.f-col a:hover,.f-col a:focus-visible{border-bottom-color:var(--orange)}
+.f-col span{display:flex;align-items:center;gap:8px}
+.f-col span::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.f-big{font-family:Anton,Archivo,sans-serif;text-transform:uppercase;font-size:clamp(72px,23vw,290px);line-height:.9;white-space:nowrap;text-align:center;color:transparent;-webkit-text-stroke:2px #45454F;user-select:none;overflow:hidden}
+.f-bottom{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 24px;border-top:1px solid #34343C;padding:18px 0 26px;font-size:13px;color:#9A9AA4}
+.f-note{flex:1 1 320px;max-width:70ch}
+.f-top{color:var(--white);font-weight:800;text-decoration:none;white-space:nowrap}
+.f-top:hover{color:var(--lemon)}
+@media (min-width:860px){
+  .f-grid{grid-template-columns:1.5fr 1fr 1fr 1fr;padding:72px 0 36px}
+  .f-brand{grid-column:auto}
+}
+
+/* alsó sáv telefonon */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--white);border-top:2px solid var(--line);padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px}
+.dock div{line-height:1.05}
+.dock b{display:block;font-stretch:62%;font-weight:900;font-size:26px}
+.dock small{font-size:12px;font-weight:700}
+.dock .btn{margin-left:auto;min-height:50px;padding:8px 22px}
+
+@media (min-width:700px){
+  :root{--pad:28px}
+  body{font-size:18px}
+  section{padding:96px 0}
+  .cta-row{display:flex}
+  .facts{grid-template-columns:repeat(4,1fr)}
+  .grid2{grid-template-columns:1fr 1fr;gap:24px}
+  .tiles{grid-template-columns:repeat(8,1fr)}
+  .tiles i:nth-child(n+5){display:block}
+  .plist{grid-template-columns:1fr 1fr;align-items:start;gap:16px}
+  .pgroup summary{grid-template-columns:1fr 42px;grid-template-areas:"thumb thumb" "title btn" "price btn";padding:0 20px 18px;row-gap:4px}
+  .pgroup summary .pthumb{aspect-ratio:3/2;margin:0 -20px 16px;border:0;border-bottom:2px solid var(--line);border-radius:0}
+  .pgroup summary .pthumb img{object-position:50% 50%!important}
+  .pgroup summary .pthumb i{width:34px;height:34px;font-size:16px;right:12px;bottom:12px}
+  .pgroup summary .pt{font-size:21px}
+  .pgroup summary small{font-size:15.5px}
+  .pgroup summary::after{width:42px;height:42px;font-size:22px}
+  .plist{gap:20px}
+  form{grid-template-columns:1fr 1fr;padding:28px}
+  form .full{grid-column:1/-1}
+}
+@media (min-width:980px){
+  body{padding-bottom:0}
+  .dock{display:none}
+  .nav{height:68px}
+  .nav nav{display:flex}
+  .ship{margin-left:4px;font-size:13.5px}
+  .logo img{height:42px}
+  .nav .btn{display:inline-flex}
+  .hero{padding:24px 0;min-height:calc(100svh - 68px);display:flex;align-items:center}
+  .hero-grid{grid-template-columns:1fr 1fr;grid-template-areas:"copy stage" "act stage";column-gap:32px;row-gap:24px;align-items:center}
+  .h-copy{align-self:end;text-align:left}.h-act{align-self:start}
+  .hero h1 .dk{display:inline}.hero h1 .mb{display:none}
+  .hero h1{letter-spacing:.005em;margin-inline:0}
+  .hero .lead .dl{display:inline}.hero .lead .mb{display:none}
+  .hero .lead{margin-inline:0;max-width:36ch}
+  .hero-price{justify-content:flex-start}
+  h1.disp{font-size:clamp(64px,min(6.4vw,10.5svh),104px)}
+  .hero .lead{font-size:18px;margin-top:16px}
+  .hero .stage{width:min(100%,640px,calc((100svh - 100px) * .8))}
+  .lead{font-size:22px}
+  .form-grid{gap:44px}
+  .form-grid form{width:min(880px,100%);margin-inline:auto}
+  .btn:hover{background:var(--ink);border-color:var(--ink);color:var(--white)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="CUP SEAL – az oldal teteje"><img src="assets/logo-cupseal.webp" width="756" height="220" alt="cupseal.hu"></a>
+    <span class="ship"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M2 6h11v9H2zM13 9h4l3 3v3h-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="6" cy="17" r="2" fill="#FFE81A" stroke="currentColor" stroke-width="2"/><circle cx="17" cy="17" r="2" fill="#FFE81A" stroke="currentColor" stroke-width="2"/></svg>Országos kiszállítás</span>
+    <nav>
+      <a href="#gep">Gépek</a>
+      <a href="#mire">Felhasználás</a>
+      <a href="#tartozekok">Tartozékok</a>
+    </nav>
+    <a class="btn" href="#ajanlat">Ajánlatot kérek</a>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="h-copy">
+      <span class="eyebrow">Automata pohár- és PET dobozzáró gép</span>
+      <h1 class="disp">Dobozzáró<br class="dk"> <span class="b">gép<br class="mb"> a</span><br class="dk"> <mark>pultodra.</mark></h1>
+      <p class="lead"><span class="ml">Betöltöd, a gép lezárja.<br class="mb"> Italokhoz, desszertekhez, elvitelre.</span><span class="dl"> Elektromos, automatikus zárás italüzleteknek és vendéglátóhelyeknek, fehér vagy fekete gépházzal.</span></p>
+    </div>
+    <div class="stage">
+      <span class="sun"></span><span class="q"></span><span class="arch"></span><span class="floor"></span><span class="contact"></span>
+      <img class="machine" src="kepek-webp/dobozzaro-gep-feher-kivagott.webp" width="609" height="1000" alt="Fehér CupSeal Automatic dobozzáró gép" fetchpriority="high">
+      <span class="tag t-a">220 V · pultra</span>
+      <span class="tag t-b">210–1000 ml</span>
+      <div class="burst"><b></b><span>1 év<small>GARANCIA</small></span></div>
+    </div>
+    <div class="h-act">
+      <div class="hero-price"><b>450 000 Ft</b><span>+ ÁFA</span></div>
+      <div class="cta-row">
+        <a class="btn" href="#ajanlat">Ajánlatot kérek ↗</a>
+        <a class="btn line" href="#gep" data-reszletek="feher">Műszaki adatok</a>
+      </div>
+      <div class="facts">
+        <div><b>Automata</b><span>emelőtalp és zárás</span></div>
+        <div><b>220 V</b><span>pultra tehető</span></div>
+        <div><b>210–1000 ml</b><span>adaptercserével</span></div>
+        <div><b>2 szín</b><span>fehér vagy fekete</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tiles" aria-hidden="true"><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i><i class="t5"></i><i class="t6"></i><i class="t7"></i><i class="t8"></i></div>
+
+<section id="gep">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" style="--k:var(--deep)">A gépek</span>
+      <h2 class="disp egysor">Egy gép, két szín.</h2>
+    </div>
+    <div class="grid2">
+      <article class="card machine">
+        <div class="shot" data-reszletek="feher" role="button" tabindex="0" aria-label="Fehér gép részletei"><img class="cover" src="kepek-webp/dobozzaro-gep-feher-dobd-fel-a-csomagolast.webp" width="1254" height="1254" alt="Fehér CupSeal dobozzáró gép – Dobd fel a csomagolást!" loading="lazy" decoding="async"></div>
+        <div class="in">
+          <h3>CupSeal Automatic</h3>
+          <p><span class="sw" style="background:#fff"></span><strong>Fehér.</strong> Automatikus emelőtalp, stabil zárás, digitális vezérlés.</p>
+          <div class="price">450 000 Ft <small>+ ÁFA</small></div>
+          <div class="m-actions"><a class="btn" href="#ajanlat" data-ker="feher">Ezt kérem ↗</a><button class="btn line" type="button" data-reszletek="feher">Részletek</button></div>
+        </div>
+      </article>
+      <article class="card machine">
+        <div class="shot" data-reszletek="fekete" role="button" tabindex="0" aria-label="Fekete gép részletei"><img class="cover" src="kepek-webp/dobozzaro-gep-fekete-feketeben-is-van.webp" width="1254" height="1254" alt="Fekete CupSeal dobozzáró gép matcha itallal – Feketében is van!" loading="lazy" decoding="async"></div>
+        <div class="in">
+          <h3>CupSeal Automatic</h3>
+          <p><span class="sw" style="background:#101014"></span><strong>Fekete.</strong> Azonos professzionális kivitel, látványos pultgép vendéglátóhelyekre.</p>
+          <div class="price">450 000 Ft <small>+ ÁFA</small></div>
+          <div class="m-actions"><a class="btn" href="#ajanlat" data-ker="fekete">Ezt kérem ↗</a><button class="btn line" type="button" data-reszletek="fekete">Részletek</button></div>
+        </div>
+      </article>
+    </div>
+    <p class="note">A pontos géptípus és fedélméret egyeztetendő. A gépképek illusztrációk.</p>
+  </div>
+</section>
+
+<section id="mire" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" style="--k:var(--amber)">Mire használod</span>
+      <h2 class="disp egysor">Zárd le, add el.</h2>
+      <p class="lead">PET műanyag dobozokhoz, ivópoharakhoz és kompatibilis alumínium dobozokhoz – italtól a nasiig.</p>
+      <div class="chips">
+        <span>Jegeskávé</span><span>Bubble tea</span><span>Limonádé</span><span>Smoothie</span><span>Gyümölcsital</span><span>Desszert</span><span>Joghurtos ital</span>
+      </div>
+    </div>
+    <div class="carousel" data-carousel>
+      <div class="car-track" data-track tabindex="0" role="region" aria-label="Felhasználási példák és termékötletek, lapozható">
+        <figure class="slide"><img class="cover" src="kepek-webp/galeria-jegeskave.webp" width="1536" height="1024" alt="Jeges kávé lezárt átlátszó dobozban" loading="lazy" decoding="async"><figcaption>Jegeskávé</figcaption></figure>
+        <figure class="slide"><img class="cover" src="kepek-webp/galeria-matcha.webp" width="1536" height="1024" alt="Jeges matcha latte átlátszó dobozban" loading="lazy" decoding="async"><figcaption>Matcha</figcaption></figure>
+        <figure class="slide"><img class="cover" src="kepek-webp/galeria-gyumolcsitalok.webp" width="1536" height="1024" alt="Gyümölcsitalok lezárt dobozokban" loading="lazy" decoding="async"><figcaption>Gyümölcsital</figcaption></figure>
+        <figure class="slide"><img class="cover" src="kepek-webp/galeria-desszertek.webp" width="1536" height="1024" alt="Rétegezett desszertek lezárt dobozokban" loading="lazy" decoding="async"><figcaption>Desszert</figcaption></figure>
+        <figure class="slide"><img class="cover" src="kepek-webp/keksz-es-mogyoro-friss.webp" width="1536" height="1024" alt="Keksz és mogyoró lezárt dobozokban" loading="lazy" decoding="async"><figcaption>Nasi</figcaption></figure>
+        <figure class="slide"><img class="cover" src="kepek-webp/layered-desserts-showcase.webp" width="1536" height="1024" alt="Rétegezett desszertek sora a vitrinben" loading="lazy" decoding="async"><figcaption>Vitrinbe is</figcaption></figure>
+        <figure class="slide"><img class="cover" src="kepek-webp/fruit-drink-line.webp" width="1448" height="1086" alt="Gyümölcsitalok sora a gép mellett" loading="lazy" decoding="async"><figcaption>Limonádé</figcaption></figure>
+        <figure class="slide"><img class="cover" src="kepek-webp/dessert-concept.webp" width="1448" height="1086" alt="Tiramisu jellegű desszert lezárt dobozban" loading="lazy" decoding="async"><figcaption>Pohárdesszert</figcaption></figure>
+        <figure class="slide"><img class="cover" src="kepek-webp/felhasznalasi-peldak-kollazs.webp" width="1179" height="759" alt="Felhasználási példák: italok és desszertek lezárt dobozokban" loading="lazy" decoding="async"><figcaption>Példák a gyakorlatból</figcaption></figure>
+        <figure class="slide p"><img class="cover" src="kepek-webp/sipcan-jeges-latte.webp" width="1024" height="1536" alt="Jeges latte lezárt dobozban" loading="lazy" decoding="async"><figcaption>Jeges latte</figcaption></figure>
+        <figure class="slide p"><img class="cover" src="kepek-webp/sipcan-jeges-matcha.webp" width="1024" height="1536" alt="Jeges matcha lezárt dobozban" loading="lazy" decoding="async"><figcaption>Jeges matcha</figcaption></figure>
+        <figure class="slide p"><img class="cover" src="kepek-webp/sipcan-malna-citrus.webp" width="1024" height="1536" alt="Málnás–citrusos ital lezárt dobozban" loading="lazy" decoding="async"><figcaption>Málna–citrus</figcaption></figure>
+        <figure class="slide p"><img class="cover" src="kepek-webp/sipcan-mango-maracuja.webp" width="1024" height="1536" alt="Mangós–maracujás ital lezárt dobozban" loading="lazy" decoding="async"><figcaption>Mangó–maracuja</figcaption></figure>
+        <figure class="slide p"><img class="cover" src="kepek-webp/sipcan-vanilias-cold-brew.webp" width="1024" height="1536" alt="Vaníliás cold brew lezárt dobozban" loading="lazy" decoding="async"><figcaption>Vaníliás cold brew</figcaption></figure>
+        <figure class="slide p"><img class="cover" src="kepek-webp/canbite-mogyoromix.webp" width="1024" height="1536" alt="Mogyorómix lezárt dobozban" loading="lazy" decoding="async"><figcaption>Mogyorómix</figcaption></figure>
+        <figure class="slide p"><img class="cover" src="kepek-webp/cantreat-kekszmix.webp" width="1024" height="1536" alt="Kekszmix lezárt dobozban" loading="lazy" decoding="async"><figcaption>Kekszmix</figcaption></figure>
+      </div>
+      <div class="car-nav"><button class="car-btn prev" type="button" aria-label="Előző kép">←</button><div class="car-dots"></div><button class="car-btn next" type="button" aria-label="Következő kép">→</button></div>
+    </div>
+  </div>
+</section>
+
+<div class="tiles" aria-hidden="true"><i class="t6"></i><i class="t4"></i><i class="t7"></i><i class="t2"></i><i class="t1"></i><i class="t8"></i><i class="t3"></i><i class="t5"></i></div>
+
+<section id="tartozekok">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow" style="--k:var(--orange)">Tartozékok és fogyóanyag</span>
+      <h2 class="disp">Ami a géphez<br>még kell.</h2>
+      <p class="lead">Adapter a méretváltáshoz, doboz és fedél a napi munkához. Nettó árak.</p>
+    </div>
+    <div class="plist">
+      <details class="pgroup" style="--k:var(--deep)">
+        <summary><span class="pthumb" role="button" tabindex="0" data-nagyit="kepek-webp/dobozzaro-adapterek-magyar.webp" data-nw="1218" data-nh="1292" data-cim="Géptartozék" aria-label="Géptartozék – kép nagyítása"><img src="kepek-webp/tartozek-adapterek.webp" width="1200" height="750" alt="Cserélhető doboztartó adapterek 650, 500 és 330 ml-es dobozokhoz" style="object-position:50% 50%" loading="lazy" decoding="async"><i aria-hidden="true">⤢</i></span><span class="pt">Géptartozék</span><small>24 900 Ft-tól</small></summary>
+        <div class="rows">
+        <div class="row"><span>Zárófej / adapter más méretű dobozokhoz</span><i></i><b>39 900 Ft-tól*</b></div>
+        <div class="row"><span>Tartó / emelő adapter méretváltáshoz</span><i></i><b>24 900 Ft-tól*</b></div>
+        </div>
+      </details>
+      <details class="pgroup" style="--k:var(--lemon)">
+        <summary><span class="pthumb" role="button" tabindex="0" data-nagyit="kepek-webp/cup-seal-pet-dobozok-330-500-600.webp" data-nw="1536" data-nh="1024" data-cim="Fedél" aria-label="Fedél – kép nagyítása"><img src="kepek-webp/tartozek-fedel.webp" width="1200" height="750" alt="Alumínium nyitófüles fedél PET dobozhoz" style="object-position:28% 50%" loading="lazy" decoding="async"><i aria-hidden="true">⤢</i></span><span class="pt">Fedél</span><small>29 Ft-tól</small></summary>
+        <div class="rows">
+        <div class="row"><span>Alumínium nyitófüles, 55 mm</span><i></i><b>29 Ft-tól*</b></div>
+        <div class="row"><span>Könnyen téphető, elviteles italokhoz</span><i></i><b>29 Ft-tól*</b></div>
+        </div>
+      </details>
+      <details class="pgroup" style="--k:var(--orange)">
+        <summary><span class="pthumb" role="button" tabindex="0" data-nagyit="kepek-webp/cup-seal-pet-dobozok-330-500-600.webp" data-nw="1536" data-nh="1024" data-cim="PET doboz alumíniumfedéllel" aria-label="PET doboz alumíniumfedéllel – kép nagyítása"><img src="kepek-webp/tartozek-pet-doboz-alufedellel.webp" width="1200" height="750" alt="330, 500 és 600 ml-es PET dobozok alumíniumfedéllel" style="object-position:50% 50%" loading="lazy" decoding="async"><i aria-hidden="true">⤢</i></span><span class="pt">PET doboz alumíniumfedéllel</span><small>149 Ft-tól</small></summary>
+        <div class="rows">
+        <div class="row"><span>330 ml</span><i></i><b>149 Ft</b></div>
+        <div class="row"><span>500 ml</span><i></i><b>179 Ft</b></div>
+        <div class="row"><span>600 ml</span><i></i><b>199 Ft</b></div>
+        </div>
+      </details>
+      <details class="pgroup" style="--k:var(--amber)">
+        <summary><span class="pthumb" role="button" tabindex="0" data-nagyit="kepek-webp/pet-dobozvalasztek-tiszta.webp" data-nw="1097" data-nh="1434" data-cim="PET doboz és pohár, fedél nélkül" aria-label="PET doboz és pohár, fedél nélkül – kép nagyítása"><img src="kepek-webp/tartozek-doboz-valasztek.webp" width="1200" height="750" alt="PET doboz- és pohárválaszték 250-től 1000 ml-ig" style="object-position:50% 40%" loading="lazy" decoding="async"><i aria-hidden="true">⤢</i></span><span class="pt">PET doboz és pohár, fedél nélkül</span><small>58 Ft-tól</small></summary>
+        <div class="rows">
+        <div class="row"><span>250–330 ml</span><i></i><b>58 Ft-tól*</b></div>
+        <div class="row"><span>350–500 ml</span><i></i><b>80 Ft-tól*</b></div>
+        <div class="row"><span>650–700 ml</span><i></i><b>120 Ft-tól*</b></div>
+        <div class="row"><span>900–1000 ml</span><i></i><b>160 Ft-tól*</b></div>
+        </div>
+      </details>
+    </div>
+    <p class="note">Az árak darabonként, + ÁFA értendők. *Bevezető, tájékoztató árak; mennyiség, forma és szállítás szerint változhatnak. A végleges kompatibilitást mindig a választott szájátmérő és zárófej alapján ellenőrizzük.</p>
+  </div>
+</section>
+
+<section id="ajanlat">
+  <div class="wrap form-grid">
+    <div class="head">
+      <span class="eyebrow" style="--k:var(--deep)">Ajánlatkérés</span>
+      <h2 class="disp">Kérj ajánlatot<br>a gépre.</h2>
+      <p class="lead">Írd meg, mit zárnál le és mekkora mennyiségben. A gépet a dobozodhoz és a fedeledhez igazítva ajánljuk ki.</p>
+    </div>
+    <form class="card" action="ajanlat.php" method="post" novalidate>
+      <label class="hp" aria-hidden="true">Weboldal<input name="weboldal" tabindex="-1" autocomplete="off"></label>
+      <input type="hidden" name="kt" value="">
+      <label>Név<input name="nev" autocomplete="name" required></label>
+      <label>Cég / üzlet neve<input name="ceg" autocomplete="organization"></label>
+      <label>Telefon<input name="telefon" type="tel" inputmode="tel" autocomplete="tel" required></label>
+      <label>E-mail<input name="email" type="email" inputmode="email" autocomplete="email" required></label>
+      <div class="full">
+        <fieldset>
+          <legend>Gép színe</legend>
+          <label class="chip"><input type="radio" name="szin" value="feher" checked><span>Fehér</span></label>
+          <label class="chip"><input type="radio" name="szin" value="fekete"><span>Fekete</span></label>
+          <label class="chip"><input type="radio" name="szin" value="mindegy"><span>Még nem tudom</span></label>
+        </fieldset>
+      </div>
+      <div class="full">
+        <fieldset>
+          <legend>A gép mellé kérek</legend>
+          <label class="chip"><input type="checkbox" name="melle[]" value="adapter"><span>Adapter</span></label>
+          <label class="chip"><input type="checkbox" name="melle[]" value="doboz"><span>Dobozok</span></label>
+          <label class="chip"><input type="checkbox" name="melle[]" value="fedel"><span>Fedelek</span></label>
+        </fieldset>
+      </div>
+      <label>Dobozméret
+        <select name="meret">
+          <option>Még nem tudom</option>
+          <option>250–330 ml</option>
+          <option>350–500 ml</option>
+          <option>600–700 ml</option>
+          <option>900–1000 ml</option>
+        </select>
+      </label>
+      <label>Becsült havi darabszám<input name="mennyiseg" inputmode="numeric" placeholder="pl. 2 000"></label>
+      <label class="full">Mit zárnál le?<textarea name="uzenet" rows="3" placeholder="pl. jegeskávé és limonádé, elvitelre"></textarea></label>
+      <label class="consent full"><input type="checkbox" name="adatkezeles" value="igen" required><span>Elolvastam és elfogadom az <a href="adatkezeles.html" target="_blank">adatkezelési tájékoztatót</a>. Az adataimat csak az ajánlatadáshoz használjátok.</span></label>
+      <div class="form-msg hiba full" role="alert" hidden></div>
+      <button class="btn full" type="submit">Ajánlatkérés elküldése ↗</button>
+    </form>
+    <div class="card form-done" hidden tabindex="-1">
+      <span class="ok" aria-hidden="true">✓</span>
+      <h3>Megkaptuk!</h3>
+      <p class="lead">Köszönjük az ajánlatkérést. Hamarosan jelentkezünk telefonon vagy e-mailben.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="tiles" aria-hidden="true"><i class="t3"></i><i class="t1"></i><i class="t5"></i><i class="t8"></i><i class="t2"></i><i class="t7"></i><i class="t4"></i><i class="t6"></i></div>
+  <div class="wrap f-grid">
+    <div class="f-brand">
+      <a class="logo f-logo" href="#top" aria-label="CUP SEAL – az oldal teteje"><img src="assets/logo-cupseal.webp" width="756" height="220" alt="cupseal.hu"></a>
+      <p class="f-tag">Automata pohár- és PET dobozzáró gép vendéglátóhelyeknek. Betöltöd, a gép lezárja.</p>
+      <a class="btn" href="#ajanlat">Ajánlatot kérek ↗</a>
+      <!-- TODO: nyilvános e-mail-cím és telefonszám, ha lesz (pl. info@cupseal.hu) -->
+    </div>
+    <nav class="f-col" aria-label="Oldaltérkép">
+      <h3>Oldal</h3>
+      <a href="#gep">Gépek</a>
+      <a href="#mire">Felhasználás</a>
+      <a href="#tartozekok">Tartozékok</a>
+      <a href="#ajanlat">Ajánlatkérés</a>
+    </nav>
+    <div class="f-col">
+      <h3>Miért mi</h3>
+      <span>1 év garancia</span>
+      <span>Próbazárás a dobozoddal</span>
+      <span>Online műszaki támogatás</span>
+      <span>Ingyenes pótalkatrész</span>
+    </div>
+    <nav class="f-col" aria-label="Jogi információk">
+      <h3>Jogi</h3>
+      <a href="adatkezeles.html">Adatkezelési tájékoztató</a>
+      <a href="adatkezeles.html#impresszum">Impresszum</a>
+      <a href="#" data-suti-beallitas>Süti-beállítások</a>
+    </nav>
+  </div>
+  <div class="wrap f-big" aria-hidden="true">Cup Seal</div>
+  <div class="wrap f-bottom">
+    <p>© 2026 CUP SEAL · Minden jog fenntartva.</p>
+    <p class="f-note">A termékfotók és műszaki adatok tájékoztató jellegűek; rendelés előtt egyeztetjük a dobozt, a fedelet és az adaptert.</p>
+    <a class="f-top" href="#top">Vissza a tetejére ↑</a>
+  </div>
+</footer>
+
+<dialog class="modal" id="reszletek" aria-labelledby="modal-cim">
+  <div class="m-in">
+    <button class="m-close" type="button" aria-label="Bezárás" data-zar>✕</button>
+    <div class="m-art">
+      <span class="m-sun"></span><span class="m-arch"></span><span class="m-floor"></span><span class="m-contact"></span>
+      <img class="m-gep" src="kepek-webp/dobozzaro-gep-feher-kivagott.webp" width="609" height="1000" alt="Fehér CupSeal Automatic dobozzáró gép">
+      <div class="burst"><b></b><span>1 év<small>GARANCIA</small></span></div>
+    </div>
+    <div class="m-body">
+      <span class="eyebrow" style="--k:var(--deep)">Műszaki adatok</span>
+      <h2 class="disp" id="modal-cim">CupSeal Automatic <em data-szin-nev>fehér</em></h2>
+      <div class="m-price"><b>450 000 Ft</b><span>+ ÁFA</span></div>
+
+      <div class="m-tabs" role="tablist" aria-label="Kivitel">
+        <button type="button" role="tab" id="tab-a" aria-controls="panel-a" aria-selected="true">Folyamatos zárógép</button>
+        <button type="button" role="tab" id="tab-b" aria-controls="panel-b" aria-selected="false" tabindex="-1">Új gépkínálat</button>
+      </div>
+      <dl class="m-spec" id="panel-a" role="tabpanel" aria-labelledby="tab-a">
+        <div><dt>Zárási eljárás</dt><dd>Nagyfrekvenciás zárás</dd></div>
+        <div><dt>Működés</dt><dd>Elektromos, automatikus</dd></div>
+        <div><dt>Feszültség</dt><dd>220 V / 110 V, kivitel szerint</dd></div>
+        <div><dt>Méret</dt><dd>260 × 430 × 590 mm (sz × mé × ma)</dd></div>
+        <div><dt>Tömeg</dt><dd>40 kg</dd></div>
+        <div><dt>Fő alkatrész</dt><dd>Motor</dd></div>
+        <div><dt>Szín</dt><dd>Fehér vagy fekete</dd></div>
+        <div><dt>Származás</dt><dd>Fujian, Kína</dd></div>
+        <div><dt>Csomagolás</dt><dd>Karton, faláda vagy papírdoboz</dd></div>
+      </dl>
+      <dl class="m-spec" id="panel-b" role="tabpanel" aria-labelledby="tab-b" hidden>
+        <div><dt>Zárás</dt><dd>Automatikus</dd></div>
+        <div><dt>Feszültség</dt><dd>220 V / 50–60 Hz</dd></div>
+        <div><dt>Teljesítmény</dt><dd>370 W</dd></div>
+        <div><dt>Méret</dt><dd>22,3 × 19,1 × 14 cm</dd></div>
+        <div><dt>Nettó tömeg</dt><dd>47 kg</dd></div>
+        <div><dt>Szín</dt><dd>Fehér / fekete</dd></div>
+      </dl>
+
+      <ul class="m-perks">
+        <li style="--k:var(--lemon)"><b>1 év garancia</b><span>a gépre</span></li>
+        <li style="--k:var(--orange)"><b>Online támogatás</b><span>videós műszaki segítség</span></li>
+        <li style="--k:var(--amber)"><b>Ingyenes pótalkatrész</b><span>értékesítés utáni támogatás</span></li>
+        <li style="--k:var(--deep)"><b>Vizsgálati jegyzőkönyv</b><span>rendelkezésre áll</span></li>
+      </ul>
+
+      <details class="m-info">
+        <summary>Méretek egy pillantásra</summary>
+        <img src="kepek-webp/dobozzaro-muszaki-adatok-magyar.webp" width="1559" height="1009" alt="Dobozzáró gép műszaki adatai: 220 V / 50–60 Hz, 370 W, 47 kg, fehér vagy fekete kivitel" loading="lazy" decoding="async">
+      </details>
+
+      <p class="note">Az adatok a kapott termékleírás fordításai. A pontos méretet és tömeget, a 110/220 V-os kivitelt és a zárófejet megrendelés előtt egyeztetjük.</p>
+      <div class="m-cta"><a class="btn" href="#ajanlat" data-ker>Ezt kérem ↗</a><button class="btn line" type="button" data-zar>Bezárás</button></div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="lightbox" id="nagyito" aria-label="Kép nagyítva">
+  <button class="m-close" type="button" aria-label="Bezárás" data-lb-zar>✕</button>
+  <figure><img src="" alt=""><figcaption></figcaption></figure>
+</dialog>
+
+<div class="dock">
+  <div><b>450 000 Ft</b><small>+ ÁFA · zárógép</small></div>
+  <a class="btn" href="#ajanlat">Ajánlatot kérek</a>
+</div>
+
+<script>
+// Gép részletei felugró ablakban + „Ezt kérem” előre kiválasztja a színt az űrlapon.
+(function () {
+  var dlg = document.getElementById('reszletek');
+  if (!dlg) return;
+  var GEPEK = {
+    feher:  { nev: 'fehér',  kep: 'kepek-webp/dobozzaro-gep-feher-kivagott.webp',  w: 609, alt: 'Fehér CupSeal Automatic dobozzáró gép' },
+    fekete: { nev: 'fekete', kep: 'kepek-webp/dobozzaro-gep-fekete-kivagott.webp', w: 608, alt: 'Fekete CupSeal Automatic dobozzáró gép' }
+  };
+  var img = dlg.querySelector('.m-gep'), nev = dlg.querySelector('[data-szin-nev]'), ker = dlg.querySelector('.m-cta [data-ker]');
+  var visszaFokusz = null, simit = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+
+  function nyit(szin, honnan) {
+    var g = GEPEK[szin] || GEPEK.feher;
+    img.src = g.kep; img.width = g.w; img.alt = g.alt;
+    nev.textContent = g.nev; ker.setAttribute('data-ker', szin);
+    visszaFokusz = honnan;
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+    document.documentElement.style.overflow = 'hidden';
+    dlg.querySelectorAll('.m-in, .m-body').forEach(function (el) { el.scrollTop = 0; });
+  }
+  function zar() { if (dlg.close) dlg.close(); else { dlg.removeAttribute('open'); dlg.dispatchEvent(new Event('close')); } }
+  dlg.addEventListener('close', function () {
+    document.documentElement.style.overflow = '';
+    if (visszaFokusz && visszaFokusz.focus) visszaFokusz.focus({ preventScroll: true });
+  });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) zar(); });
+
+  function szinBeallit(szin) {
+    var r = document.querySelector('#ajanlat input[name="szin"][value="' + szin + '"]');
+    if (r) r.checked = true;
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('[data-reszletek]');
+    if (t) { e.preventDefault(); nyit(t.getAttribute('data-reszletek'), t); return; }
+    if (e.target.closest('[data-zar]')) { zar(); return; }
+    var k = e.target.closest('[data-ker]');
+    if (k) {
+      var szin = k.getAttribute('data-ker');
+      if (szin) szinBeallit(szin);
+      if (dlg.open) {
+        e.preventDefault(); zar();
+        document.getElementById('ajanlat').scrollIntoView({ behavior: simit });
+      }
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    var t = e.target.closest && e.target.closest('.shot[data-reszletek]');
+    if (t && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); nyit(t.getAttribute('data-reszletek'), t); }
+  });
+
+  // Fülek a két adatlap között
+  var tabs = Array.prototype.slice.call(dlg.querySelectorAll('[role="tab"]'));
+  function valaszt(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { valaszt(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      valaszt(n); n.focus();
+    });
+  });
+})();
+
+// Tartozék-képek nagyítása (a bélyegkép a lenyitó sorban van, ezért a kattintás nem nyitja/zárja a csoportot).
+(function () {
+  var lb = document.getElementById('nagyito');
+  if (!lb) return;
+  var img = lb.querySelector('img'), cap = lb.querySelector('figcaption'), vissza = null;
+  function nyit(t) {
+    img.src = t.getAttribute('data-nagyit'); img.width = +t.getAttribute('data-nw'); img.height = +t.getAttribute('data-nh');
+    img.alt = t.querySelector('img').alt; cap.textContent = t.getAttribute('data-cim');
+    vissza = t;
+    if (lb.showModal) lb.showModal(); else lb.setAttribute('open', '');
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function zar() { if (lb.close) lb.close(); else { lb.removeAttribute('open'); lb.dispatchEvent(new Event('close')); } }
+  lb.addEventListener('close', function () { document.documentElement.style.overflow = ''; if (vissza) vissza.focus({ preventScroll: true }); });
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.closest('[data-lb-zar]')) zar(); });
+  document.querySelectorAll('[data-nagyit]').forEach(function (t) {
+    t.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); nyit(t); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); nyit(t); }
+    });
+  });
+})();
+
+// Lapozható körhinták: húzás/görgetés + nyilak + pöttyök.
+document.querySelectorAll('[data-carousel]').forEach(function (c) {
+  var track = c.querySelector('[data-track]'), slides = Array.prototype.slice.call(track.children);
+  var prev = c.querySelector('.prev'), next = c.querySelector('.next'), dots = c.querySelector('.car-dots');
+  var simit = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  var poz = [];
+  function bal(el) { return el.offsetLeft - track.offsetLeft; }
+  // Csak a ténylegesen elérhető görgetési pozíciók: a sáv végén egyszerre látszó képek egy pozíciót adnak.
+  function szamol() {
+    var max = Math.max(0, track.scrollWidth - track.clientWidth), uj = [];
+    slides.forEach(function (sl) {
+      var x = Math.min(bal(sl), max);
+      if (!uj.length || x - uj[uj.length - 1] > 8) uj.push(x);
+    });
+    if (max - uj[uj.length - 1] > 8) uj.push(max);
+    if (uj.length !== poz.length) {
+      dots.innerHTML = '';
+      uj.forEach(function (x, i) {
+        var bt = document.createElement('button');
+        bt.type = 'button'; bt.setAttribute('aria-label', (i + 1) + '. oldal / ' + uj.length);
+        bt.addEventListener('click', function () { ugrik(i); });
+        dots.appendChild(bt);
+      });
+    }
+    poz = uj;
+    c.querySelector('.car-nav').hidden = poz.length < 2;
+  }
+  function ugrik(i) { i = Math.max(0, Math.min(poz.length - 1, i)); track.scrollTo({ left: poz[i], behavior: simit }); }
+  function aktiv() {
+    var x = track.scrollLeft, legjobb = 0, tav = Infinity;
+    poz.forEach(function (p, i) { var d = Math.abs(p - x); if (d < tav) { tav = d; legjobb = i; } });
+    return legjobb;
+  }
+  function frissit() {
+    var i = aktiv();
+    dots.querySelectorAll('button').forEach(function (bt, j) { bt.setAttribute('aria-current', j === i ? 'true' : 'false'); });
+    prev.disabled = i === 0; next.disabled = i === poz.length - 1;
+  }
+  prev.addEventListener('click', function () { ugrik(aktiv() - 1); });
+  next.addEventListener('click', function () { ugrik(aktiv() + 1); });
+  track.addEventListener('scroll', frissit, { passive: true });
+  addEventListener('resize', function () { szamol(); frissit(); });
+  // a képek betöltésekor változhat a szélesség
+  slides.forEach(function (sl) { var im = sl.querySelector('img'); if (im && !im.complete) im.addEventListener('load', function () { szamol(); frissit(); }, { once: true }); });
+  szamol(); frissit();
+});
+
+// Ajánlatkérés: beküldés oldalújratöltés nélkül; JS nélkül a sima POST → köszönőoldal működik.
+(function () {
+  var f = document.querySelector('#ajanlat form');
+  if (!f || !window.fetch) return;
+  var kezdet = Date.now();
+  var msg = f.querySelector('.form-msg'), btn = f.querySelector('[type=submit]'), kesz = document.querySelector('.form-done');
+  function jelol(nevek) {
+    f.querySelectorAll('[aria-invalid]').forEach(function (el) { el.removeAttribute('aria-invalid'); });
+    nevek.forEach(function (n) { var el = f.elements[n]; if (el) el.setAttribute('aria-invalid', 'true'); });
+    var elso = nevek.length && f.elements[nevek[0]]; if (elso && elso.focus) elso.focus();
+  }
+  function hiba(szoveg, mezok) { msg.textContent = szoveg; msg.hidden = false; jelol(mezok || []); }
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    f.elements.kt.value = String(Date.now() - kezdet);
+    msg.hidden = true;
+    var rossz = ['nev', 'telefon', 'email', 'adatkezeles'].filter(function (n) { return !f.elements[n].checkValidity(); });
+    if (rossz.length) return hiba('Kérjük, töltsd ki a megjelölt mezőket, és fogadd el az adatkezelési tájékoztatót.', rossz);
+    var eredeti = btn.textContent; btn.disabled = true; btn.textContent = 'Küldés…';
+    fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d.ok) return hiba(d.uzenet, d.mezok);
+        f.hidden = true; kesz.hidden = false; kesz.focus();
+      })
+      .catch(function () { hiba('Nem sikerült elküldeni. Ellenőrizd az internetkapcsolatot, és próbáld újra.'); })
+      .finally(function () { btn.disabled = false; btn.textContent = eredeti; });
+  });
+})();
+</script>
+<script src="assets/suti.js" defer></script>
+</body>
+</html>

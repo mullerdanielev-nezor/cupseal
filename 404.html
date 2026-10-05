@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="hu" data-adatkezeles="/adatkezeles.html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Az oldal nem található – CUP SEAL</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<!-- Abszolút útvonalak: a 404 bármilyen mélységű címen megjelenhet. -->
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts.css">
+<link rel="stylesheet" href="/assets/oldal.css">
+<style>
+.nf{padding:56px 0 72px}
+.nf .szam{display:flex;justify-content:center;align-items:center;gap:clamp(8px,2vw,20px);margin-bottom:28px}
+.nf .szam b{font-family:Anton,Archivo,sans-serif;font-weight:400;font-size:clamp(120px,30vw,280px);line-height:.9}
+.nf .doboz{position:relative;width:clamp(84px,20vw,180px);aspect-ratio:3/5;border:3px solid var(--ink);border-radius:18% 18% 14% 14%/10% 10% 8% 8%;background:linear-gradient(to top,var(--orange) 0 42%,var(--lemon) 42% 58%,var(--pale) 58%);overflow:hidden}
+.nf .doboz::before{content:"";position:absolute;left:-3px;right:-3px;top:-3px;height:14%;background:#D9D9DE;border-bottom:3px solid var(--ink);border-radius:18% 18% 0 0/40% 40% 0 0}
+.nf .doboz::after{content:"";position:absolute;left:50%;top:2%;width:34%;height:7%;transform:translateX(-50%) rotate(-12deg);border:3px solid var(--ink);border-radius:99px;background:#EDEDF0;transform-origin:20% 50%;animation:ful 2.4s ease-in-out infinite}
+@keyframes ful{0%,60%,100%{transform:translateX(-50%) rotate(-12deg)}75%{transform:translateX(-50%) rotate(-38deg)}}
+@media (prefers-reduced-motion:reduce){.nf .doboz::after{animation:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="/" aria-label="CUP SEAL – főoldal"><img src="/assets/logo-cupseal.webp" width="756" height="220" alt="cupseal.hu"></a>
+    <a class="btn" href="/#ajanlat">Ajánlatot kérek</a>
+  </div>
+</header>
+
+<main>
+  <section class="wrap nf">
+    <div class="szam" aria-hidden="true"><b>4</b><span class="doboz"></span><b>4</b></div>
+    <div class="head">
+      <span class="eyebrow" style="--k:var(--deep)">404 · Nincs ilyen oldal</span>
+      <h1 class="disp">Ez a doboz<br>üres.</h1>
+      <p class="lead">A keresett oldal nem létezik, vagy elköltözött. A gépet, a dobozokat és az ajánlatkérést a főoldalon találod.</p>
+      <div class="actions">
+        <a class="btn" href="/">Vissza a főoldalra</a>
+        <a class="btn line" href="/#ajanlat">Ajánlatot kérek ↗</a>
+      </div>
+    </div>
+  </section>
+  <div class="tiles" aria-hidden="true"><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i><i class="t5"></i><i class="t6"></i><i class="t7"></i><i class="t8"></i></div>
+</main>
+
+<footer style="margin-top:0">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="CUP SEAL – főoldal"><img src="/assets/logo-cupseal.webp" width="756" height="220" alt="cupseal.hu"></a>
+    <nav class="flinks" aria-label="Jogi információk">
+      <a href="/adatkezeles.html">Adatkezelési tájékoztató</a>
+      <button type="button" data-suti-beallitas>Süti-beállítások</button>
+    </nav>
+    <p>© 2026 CUP SEAL</p>
+  </div>
+</footer>
+
+<script src="/assets/suti.js" defer></script>
+</body>
+</html>

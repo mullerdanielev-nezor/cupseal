@@ -1,0 +1,84 @@
+/* Aloldalak (adatkezelés, 404, köszönjük) közös stílusa – a főoldal paletta és tipográfia szerint */
+:root{
+  --ink:#101014; --white:#fff; --line:#101014;
+  --pale:#FFF6B8; --lemon:#FFE81A; --amber:#FFBE0B; --orange:#FF8A00; --deep:#F0540A;
+  --r:24px; --pad:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip;-webkit-text-size-adjust:100%}
+body{font-family:Archivo,system-ui,sans-serif;font-size:17px;line-height:1.55;color:var(--ink);background:var(--white);overflow-x:clip;min-height:100vh;display:flex;flex-direction:column}
+main{flex:1}
+a{color:inherit}
+.wrap{width:min(1180px,100% - 2*var(--pad));margin-inline:auto}
+.disp{font-family:Anton,Archivo,sans-serif;font-weight:400;text-transform:uppercase;line-height:1.14;letter-spacing:.005em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;font:inherit;font-weight:800;font-size:18px;text-decoration:none;background:var(--orange);color:var(--ink);border:2px solid var(--ink);border-radius:99px;padding:12px 26px;cursor:pointer}
+.btn.line{background:var(--white)}
+.btn:active{transform:scale(.97)}
+
+header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2px solid var(--line)}
+.nav{display:flex;align-items:center;gap:24px;height:60px}
+.nav .btn{margin-left:auto;min-height:42px;padding:6px 18px;font-size:15px}
+.logo{display:flex;align-items:center;flex:none;text-decoration:none}
+.logo img{display:block;height:36px;width:auto}
+
+.head{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:980px;margin-inline:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px}
+.eyebrow::before,.eyebrow::after{content:"";width:14px;height:14px;border-radius:50%;background:var(--k,var(--orange))}
+.head h1.disp{font-size:clamp(48px,11vw,120px);text-wrap:balance}
+.head h1.disp::after{content:"";display:block;width:108px;height:10px;margin:26px auto 0;border-radius:99px;background:linear-gradient(90deg,var(--lemon) 0 33.3%,var(--orange) 33.3% 66.6%,var(--deep) 66.6%)}
+.head .lead{font-size:19px;font-weight:500;max-width:44ch;margin:24px auto 0;text-wrap:pretty}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:32px}
+
+.tiles{display:grid;grid-template-columns:repeat(8,1fr);height:clamp(40px,12.5vw,96px)}
+.tiles i{position:relative;background:var(--a);overflow:hidden}
+.tiles i::before{content:"";position:absolute;inset:0;background:var(--b)}
+.t1{--a:var(--lemon);--b:var(--deep)}.t1::before{border-radius:0 0 100% 0}
+.t2{--a:var(--white);--b:var(--orange)}.t2::before{border-radius:50%;inset:14%!important}
+.t3{--a:var(--amber);--b:var(--ink)}.t3::before{border-radius:999px 999px 0 0;inset:28% 18% 0 18%!important}
+.t4{--a:var(--deep);--b:var(--lemon)}.t4::before{border-radius:100% 0 0 0}
+.t5{--a:var(--orange);--b:var(--white)}.t5::before{border-radius:99px;inset:36% 10%!important}
+.t6{--a:var(--white);--b:var(--amber)}.t6::before{border-radius:0 100% 0 100%}
+.t7{--a:var(--lemon);--b:var(--orange)}.t7::before{border-radius:50% 50% 0 0;inset:50% 0 0 0!important}
+.t8{--a:var(--ink);--b:var(--deep)}.t8::before{border-radius:50%;inset:22%!important}
+
+/* hosszú szöveg (adatkezelési tájékoztató) */
+.doc{max-width:780px;margin:56px auto 0}
+.doc h2{font-stretch:62%;font-weight:900;font-size:30px;line-height:1.1;text-transform:uppercase;margin:48px 0 14px;display:flex;align-items:center;gap:12px;scroll-margin-top:80px}
+.doc h2::before{content:"";flex:none;width:14px;height:14px;border-radius:50%;background:var(--orange)}
+.doc h2:nth-of-type(3n+2)::before{background:var(--amber);border-radius:999px 999px 0 0}
+.doc h2:nth-of-type(3n)::before{background:var(--deep);border-radius:4px}
+.doc h3{font-size:18px;font-weight:800;margin:24px 0 8px}
+.doc p,.doc ul{margin-bottom:12px}
+.doc ul{padding-left:22px}
+.doc li{margin-bottom:6px}
+.doc .box{border:2px solid var(--line);border-radius:var(--r);padding:18px 20px;margin:16px 0}
+.doc .box.y{background:var(--pale)}
+.doc dl div{display:grid;grid-template-columns:1fr;gap:2px;padding:10px 0;border-top:2px solid #E4E4E8}
+.doc dl div:first-child{border-top:0}
+.doc dt{font-weight:800;font-size:15px}
+.doc .tbl{overflow-x:auto;margin:14px 0;border:2px solid var(--line);border-radius:18px}
+.doc table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
+.doc th,.doc td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:2px solid #E4E4E8}
+.doc th{background:var(--lemon);font-weight:800;border-bottom:2px solid var(--line)}
+.doc tr:last-child td{border-bottom:0}
+.toc{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:28px}
+.toc a{border:2px solid var(--ink);border-radius:99px;padding:6px 14px;font-weight:800;font-size:14px;text-decoration:none}
+.toc a:hover{background:var(--ink);color:var(--white)}
+.todo{background:var(--lemon);outline:2px dashed var(--deep);padding:0 4px;border-radius:4px;font-weight:700}
+.muted{color:#55555c;font-size:14px}
+
+footer{border-top:2px solid var(--line);padding:36px 0;margin-top:80px}
+footer .logo img{height:48px}
+footer p{font-size:13.5px;color:#55555c;margin-top:14px;max-width:86ch}
+.flinks{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:18px;font-weight:700;font-size:15px}
+.flinks a,.flinks button{color:var(--ink);text-decoration:underline;text-underline-offset:3px;background:none;border:0;font:inherit;cursor:pointer;padding:0}
+
+@media (min-width:700px){
+  :root{--pad:28px}
+  body{font-size:18px}
+  .nav{height:68px}
+  .doc dl div{grid-template-columns:34% 1fr;gap:12px}
+}
+@media (min-width:980px){
+  .btn:hover{background:var(--ink);color:var(--white)}
+}

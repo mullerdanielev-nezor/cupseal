@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero-ötletek – CUP SEAL</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+:root{--ink:#101014;--white:#fff;--pale:#FFF6B8;--lemon:#FFE81A;--amber:#FFBE0B;--orange:#FF8A00;--deep:#F0540A;--gray:#EEEEEE;--pad:18px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{font-family:Archivo,system-ui,sans-serif;font-size:17px;line-height:1.45;color:var(--ink);background:var(--white);overflow-x:clip}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{width:min(1180px,100% - 2*var(--pad));margin-inline:auto}
+.disp{font-family:Anton,Archivo,sans-serif;font-weight:400;text-transform:uppercase;line-height:1.14;letter-spacing:.005em}
+.big{font-size:clamp(64px,17vw,150px)}
+.lead{font-size:19px;font-weight:500;max-width:36ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;font:inherit;font-weight:800;font-size:17px;text-decoration:none;background:var(--orange);color:var(--ink);border:2px solid var(--ink);border-radius:99px;padding:10px 24px}
+.btn.line{background:var(--white)}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.price{display:flex;align-items:baseline;gap:8px;margin-top:20px}
+.price b{font-stretch:62%;font-weight:900;font-size:48px;line-height:1}
+.price span{font-weight:800}
+.ph{position:relative;overflow:hidden;background:var(--gray)}
+.ph img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.eyebrow::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--k,var(--orange))}
+mark{background:none;color:inherit;position:relative;z-index:0;display:inline-block}
+mark::before{content:"";position:absolute;z-index:-1;left:-.06em;right:-.08em;bottom:.04em;height:.4em;background:var(--lemon);border-radius:99px}
+
+/* oldal fejléc és ötletcímkék */
+.top{padding:40px 0 28px;border-bottom:2px solid var(--ink);text-align:center}
+.top h1{font-size:clamp(48px,10vw,96px)}
+.top p{max-width:60ch;margin:12px auto 0}
+.jump{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:22px}
+.jump a{border:2px solid var(--ink);border-radius:99px;padding:6px 14px;font-weight:800;font-size:14px;text-decoration:none}
+.jump a:hover{background:var(--ink);color:var(--white)}
+.demo{position:relative;overflow:hidden;border-bottom:2px solid var(--ink);padding:28px 0 56px;scroll-margin-top:0}
+.label{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.label b{display:grid;place-items:center;min-width:46px;height:46px;border-radius:50%;background:var(--ink);color:var(--white);font-stretch:62%;font-weight:900;font-size:22px}
+.label span{font-weight:800;font-size:18px}
+.label small{flex-basis:100%;color:#55555c;font-size:14.5px}
+.dark .label small{color:#B9B9C2}
+.dark .label b{background:var(--lemon);color:var(--ink)}
+
+/* közös rács: telefonon egymás alatt, gépen egymás mellett */
+.h{display:grid;gap:36px}
+@media (min-width:900px){
+  :root{--pad:28px}
+  .h{grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .big{font-size:clamp(72px,8.6vw,132px)}
+  .label small{flex-basis:auto}
+}
+
+/* 01 · Klasszikus ív */
+.v1 .art{position:relative;max-width:440px;width:100%;margin-inline:auto;padding:24px 24px 0}
+.v1 .art::before{content:"";position:absolute;right:0;top:0;width:48%;aspect-ratio:1;border-radius:50%;background:var(--lemon)}
+.v1 .art::after{content:"";position:absolute;left:0;bottom:0;width:36%;aspect-ratio:1;border-radius:0 100% 0 0;background:var(--amber)}
+.v1 .ph{aspect-ratio:4/5;border-radius:999px 999px 0 0;border:2px solid var(--ink);border-bottom:0;z-index:1}
+
+/* 02 · Átfedés + körvonalas szó */
+.v2 .big .o{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.v2 .ph{aspect-ratio:4/5;border-radius:36px;border:2px solid var(--ink);box-shadow:12px 12px 0 var(--ink);transform:rotate(-2.5deg);max-width:420px;margin-inline:auto;width:calc(100% - 14px)}
+.v2 .sticker{position:absolute;right:-6px;top:20px;z-index:2;background:var(--lemon);border:2px solid var(--ink);border-radius:99px;padding:8px 16px;font-weight:900;transform:rotate(6deg)}
+.v2 .art{position:relative}
+@media (min-width:900px){.v2 .txt{position:relative;z-index:2}.v2 .art{margin-left:-90px}}
+
+/* 03 · Sárga panel a szélig */
+.v3 .art{position:relative;padding:36px 0 0;display:flex;justify-content:center}
+.v3 .art::before{content:"";position:absolute;inset:0 calc(-1*var(--pad));background:var(--lemon);border-top:2px solid var(--ink)}
+.v3 .ph{position:relative;width:min(380px,82%);aspect-ratio:4/5;border-radius:50% 50% 0 0/40% 40% 0 0;border:2px solid var(--ink);border-bottom:0}
+@media (min-width:900px){
+  .v3{padding-bottom:0}
+  .v3 .h{align-items:stretch}
+  .v3 .txt{padding-bottom:56px;align-self:center}
+  .v3 .art{padding-top:60px;align-items:flex-end}
+  .v3 .art::before{inset:-200px -100vw 0 0;border-top:0;border-left:2px solid var(--ink)}
+  .v3 .label{position:relative;z-index:2;max-width:56%}
+}
+
+/* 04 · Kártya forgó pecséttel */
+.v4 .card{border:2px solid var(--ink);border-radius:40px;padding:28px 22px;background:var(--white)}
+.v4 .art{position:relative;max-width:420px;width:100%;margin-inline:auto}
+.v4 .ph{aspect-ratio:1;border-radius:50%;border:2px solid var(--ink)}
+.v4 .ph img{object-position:50% 92%}
+.v4 .seal{position:absolute;right:-8px;top:-8px;width:128px;height:128px;animation:forog 14s linear infinite}
+.v4 .seal text{font:800 11.5px Archivo,sans-serif;letter-spacing:.14em;fill:var(--ink)}
+@keyframes forog{to{transform:rotate(360deg)}}
+@media (min-width:900px){.v4 .card{padding:48px}}
+
+/* 05 · Futószalag + árcímke */
+.v5 .ticker{display:flex;overflow:hidden;border-block:2px solid var(--ink);background:var(--ink);color:var(--white);margin-bottom:32px}
+.v5 .ticker div{display:flex;flex:none;gap:28px;padding:10px 14px;font-family:Anton,sans-serif;text-transform:uppercase;font-size:22px;animation:fut 22s linear infinite}
+.v5 .ticker i{font-style:normal;color:var(--lemon)}
+@keyframes fut{to{transform:translateX(-100%)}}
+.v5 .art{position:relative;max-width:440px;width:100%;margin-inline:auto}
+.v5 .ph{aspect-ratio:4/5;border-radius:24px;border:2px solid var(--ink)}
+.v5 .tag{position:absolute;left:-10px;bottom:24px;background:var(--deep);color:var(--white);border:2px solid var(--ink);border-radius:18px;padding:10px 16px;transform:rotate(-4deg);line-height:1}
+.v5 .tag b{display:block;font-stretch:62%;font-weight:900;font-size:36px}
+.v5 .tag small{font-weight:800;font-size:12px;letter-spacing:.06em}
+
+/* 06 · Bauhaus-mozaik */
+.v6 .art{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:repeat(4,1fr);aspect-ratio:3/4;max-width:460px;width:100%;margin-inline:auto;border:2px solid var(--ink)}
+.v6 .art > *{position:relative;overflow:hidden}
+.v6 .ph{grid-column:1/3;grid-row:1/5;border-right:2px solid var(--ink)}
+.v6 .s1{background:var(--lemon)}.v6 .s1::before{content:"";position:absolute;inset:0;background:var(--deep);border-radius:0 0 0 100%}
+.v6 .s2{background:var(--white)}.v6 .s2::before{content:"";position:absolute;inset:18%;background:var(--orange);border-radius:50%}
+.v6 .s3{background:var(--amber)}.v6 .s3::before{content:"";position:absolute;inset:30% 16% 0;background:var(--ink);border-radius:999px 999px 0 0}
+.v6 .s4{background:var(--ink);display:grid;place-items:center;color:var(--lemon);font-stretch:62%;font-weight:900;font-size:clamp(18px,4vw,26px);text-align:center;line-height:1}
+.v6 .s1,.v6 .s2,.v6 .s3{border-bottom:2px solid var(--ink)}
+
+/* 07 · Sötét */
+.v7{background:var(--ink);color:var(--white)}
+.v7 .big em{font-style:normal;color:var(--orange)}
+.v7 mark::before{background:var(--deep)}
+.v7 .btn.line{background:transparent;color:var(--white);border-color:var(--white)}
+.v7 .art{position:relative;max-width:440px;width:100%;margin-inline:auto}
+.v7 .ph{aspect-ratio:1;border-radius:50%;box-shadow:0 0 0 10px var(--ink),0 0 0 14px var(--orange),0 0 0 26px var(--ink),0 0 0 30px var(--lemon);margin:30px}
+.v7 .ph img{object-position:50% 85%;transform:scale(1.1);transform-origin:50% 100%}
+
+/* 08 · Ár-fókusz, adatbuborékok */
+.v8 .sub{font-size:clamp(34px,7vw,56px)}
+.v8 .huge{font-size:clamp(84px,24vw,190px);line-height:.92;color:var(--deep)}
+.v8 .huge small{display:block;font-family:Archivo;font-size:clamp(16px,.16em,26px);font-weight:900;color:var(--ink);letter-spacing:.04em;margin-top:8px}
+.v8 .art{position:relative;max-width:440px;width:100%;margin-inline:auto;padding:0 18px}
+.v8 .ph{aspect-ratio:4/5;border-radius:28px;border:2px solid var(--ink)}
+.v8 .pill{position:absolute;z-index:2;background:var(--white);border:2px solid var(--ink);border-radius:99px;padding:8px 14px;font-weight:900;font-size:15px;white-space:nowrap}
+.v8 .p1{left:0;top:14%;background:var(--lemon)}
+.v8 .p2{right:0;top:44%}
+.v8 .p3{left:6%;bottom:8%;background:var(--orange)}
+@media (min-width:900px){.v8 .huge{font-size:clamp(96px,11vw,170px)}}
+
+/* 09 · Osztott képernyő a széléig */
+.v9{padding:0}
+.v9 .label{padding:28px var(--pad) 0;margin:0 auto 0;width:min(1180px,100%)}
+.v9 .split{display:grid}
+.v9 .left{background:var(--orange);padding:40px var(--pad) 48px;border-block:2px solid var(--ink)}
+.v9 .left .btn{background:var(--ink);color:var(--white)}
+.v9 .left .btn.line{background:var(--orange);color:var(--ink)}
+.v9 .ph{aspect-ratio:4/5;max-height:80vh;width:100%}
+@media (min-width:900px){
+  .v9 .label{padding-bottom:28px}
+  .v9 .split{grid-template-columns:1fr 1fr;min-height:640px}
+  .v9 .left{display:flex;flex-direction:column;justify-content:center;padding:56px 48px 56px max(var(--pad),calc((100vw - 1180px)/2));border-bottom:0}
+  .v9 .ph{aspect-ratio:auto;max-height:none;height:100%;border-top:2px solid var(--ink);border-left:2px solid var(--ink)}
+}
+
+/* 10 · Magazin */
+.v10 .side{display:none}
+.v10 .num{font-stretch:62%;font-weight:900;font-size:20px;border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:18px;display:flex;justify-content:space-between}
+.v10 .stats{display:grid;grid-template-columns:repeat(3,1fr);border-block:2px solid var(--ink);margin-top:26px}
+.v10 .stats div{padding:12px 10px}
+.v10 .stats div + div{border-left:2px solid var(--ink)}
+.v10 .stats b{display:block;font-stretch:62%;font-weight:900;font-size:28px;line-height:1}
+.v10 .stats span{font-size:13px;font-weight:700}
+.v10 figure{max-width:420px;width:100%;margin-inline:auto}
+.v10 .ph{aspect-ratio:3/4;border-radius:999px 999px 24px 24px;border:2px solid var(--ink)}
+.v10 figcaption{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;font-weight:700;padding-top:10px}
+@media (min-width:900px){
+  .v10 .h{grid-template-columns:auto 1.15fr .85fr}
+  .v10 .side{display:block;writing-mode:vertical-rl;transform:rotate(180deg);font-weight:900;letter-spacing:.3em;text-transform:uppercase;font-size:13px;align-self:stretch;border-left:2px solid var(--ink);padding-left:12px}
+}
+
+@media (prefers-reduced-motion:reduce){.v4 .seal,.v5 .ticker div{animation:none}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <h1 class="disp">10 hero-ötlet</h1>
+    <p>Mindegyiknél telefonon a nagy cím van felül és alatta a kép, asztali szélességen (900 px felett) egymás mellett vannak. Méretezd az ablakot, hogy lásd a váltást.</p>
+    <nav class="jump">
+      <a href="#v1">01 Ív</a><a href="#v2">02 Átfedés</a><a href="#v3">03 Sárga panel</a><a href="#v4">04 Kártya</a><a href="#v5">05 Futószalag</a>
+      <a href="#v6">06 Bauhaus</a><a href="#v7">07 Sötét</a><a href="#v8">08 Ár-fókusz</a><a href="#v9">09 Osztott</a><a href="#v10">10 Magazin</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 01 -->
+<section class="demo v1" id="v1"><div class="wrap">
+  <div class="label"><b>01</b><span>Klasszikus ív</span><small>A mostani irány letisztítva: szöveg balra, íves keret sárga körrel és negyedkörrel.</small></div>
+  <div class="h">
+    <div class="txt">
+      <span class="eyebrow">Automata dobozzáró gép</span>
+      <h2 class="disp big">Dobozzáró<br>gép a<br><mark>pultodra.</mark></h2>
+      <p class="lead" style="margin-top:20px">Betöltöd, a gép lezárja. Elektromos, automatikus zárás italüzleteknek.</p>
+      <div class="price"><b>450 000 Ft</b><span>+ ÁFA</span></div>
+      <div class="ctas"><a class="btn" href="#">Ajánlatot kérek ↗</a><a class="btn line" href="#">Műszaki adatok</a></div>
+    </div>
+    <div class="art"><div class="ph"><img src="kepek-webp/hero-dobozzaro-gep-feher.webp" alt="Fehér dobozzáró gép"></div></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="demo v2" id="v2"><div class="wrap">
+  <div class="label"><b>02</b><span>Átfedés + körvonalas szó</span><small>A kép asztali nézetben becsúszik a cím alá, kicsit elforgatva, keményárnyékkal; egy szó csak körvonalas.</small></div>
+  <div class="h">
+    <div class="txt">
+      <h2 class="disp big">Zárd le<br>egy <span class="o">gombbal.</span></h2>
+      <p class="lead" style="margin-top:20px">Jegeskávé, limonádé, desszert: betöltöd, és két másodperc múlva kész.</p>
+      <div class="ctas"><a class="btn" href="#">Ajánlatot kérek ↗</a></div>
+    </div>
+    <div class="art"><span class="sticker">450 000 Ft + ÁFA</span><div class="ph"><img src="kepek-webp/hero-dobozzaro-gep-feher.webp" alt="Fehér dobozzáró gép"></div></div>
+  </div>
+</div></section>
+
+<!-- 03 -->
+<section class="demo v3" id="v3"><div class="wrap">
+  <div class="label"><b>03</b><span>Sárga panel a szélig</span><small>A kép oldala egy képernyőszélig futó citromsárga sáv; a gép egy lekerekített „kupolában” áll rajta.</small></div>
+  <div class="h">
+    <div class="txt">
+      <span class="eyebrow" style="--k:var(--deep)">Új · CupSeal Automatic</span>
+      <h2 class="disp big">A pult<br>legjobb<br>munkatársa.</h2>
+      <p class="lead" style="margin-top:20px">Automatikus emelőtalp, stabil zárás, fehér vagy fekete gépház.</p>
+      <div class="ctas"><a class="btn" href="#">Ajánlatot kérek ↗</a><a class="btn line" href="#">Megnézem</a></div>
+    </div>
+    <div class="art"><div class="ph"><img src="kepek-webp/hero-dobozzaro-gep-feher.webp" alt="Fehér dobozzáró gép"></div></div>
+  </div>
+</div></section>
+
+<!-- 04 -->
+<section class="demo v4" id="v4" style="background:var(--pale)"><div class="wrap">
+  <div class="label"><b>04</b><span>Kártya forgó pecséttel</span><small>Az egész hero egy nagy lekerekített kártya; a gép halványsárga körben, mellette lassan forgó „garancia-pecsét”.</small></div>
+  <div class="card h">
+    <div class="txt">
+      <span class="eyebrow">450 000 Ft + ÁFA</span>
+      <h2 class="disp big">Lezárva.<br>Elvitelre.<br>Kész.</h2>
+      <div class="ctas"><a class="btn" href="#">Ajánlatot kérek ↗</a></div>
+    </div>
+    <div class="art">
+      <div class="ph"><img src="kepek-webp/hero-dobozzaro-gep-feher.webp" alt="Fehér dobozzáró gép"></div>
+      <svg class="seal" viewBox="0 0 128 128" aria-hidden="true">
+        <circle cx="64" cy="64" r="62" fill="#FFE81A" stroke="#101014" stroke-width="2"/>
+        <circle cx="64" cy="64" r="22" fill="#F0540A"/>
+        <defs><path id="kor" d="M64,64 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+        <text><textPath href="#kor">1 ÉV GARANCIA · PRÓBAZÁRÁS · </textPath></text>
+      </svg>
+    </div>
+  </div>
+</div></section>
+
+<!-- 05 -->
+<section class="demo v5" id="v5" style="padding-top:0">
+  <div class="ticker" aria-hidden="true">
+    <div>Jegeskávé <i>●</i> Bubble tea <i>●</i> Limonádé <i>●</i> Smoothie <i>●</i> Desszert <i>●</i> Matcha <i>●</i></div>
+    <div>Jegeskávé <i>●</i> Bubble tea <i>●</i> Limonádé <i>●</i> Smoothie <i>●</i> Desszert <i>●</i> Matcha <i>●</i></div>
+  </div>
+  <div class="wrap">
+    <div class="label"><b>05</b><span>Futószalag + árcímke</span><small>Felül végtelenített sáv a termékekkel, a képen ferde árcímke. Mozgalmas, „street food” hangulat.</small></div>
+    <div class="h">
+      <div class="txt">
+        <h2 class="disp big">Amit<br>elvitelre<br>adsz, <mark>lezárja.</mark></h2>
+        <div class="ctas"><a class="btn" href="#">Ajánlatot kérek ↗</a><a class="btn line" href="#">Mit zárhatok?</a></div>
+      </div>
+      <div class="art">
+        <div class="ph"><img src="kepek-webp/hero-dobozzaro-gep-feher.webp" alt="Fehér dobozzáró gép"></div>
+        <div class="tag"><b>450 000 Ft</b><small>+ ÁFA · 1 ÉV GARANCIA</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="demo v6" id="v6"><div class="wrap">
+  <div class="label"><b>06</b><span>Bauhaus-mozaik</span><small>A kép egy geometrikus csempe-rács része – az oldal formasorát viszi tovább a herobe.</small></div>
+  <div class="h">
+    <div class="txt">
+      <span class="eyebrow" style="--k:var(--amber)">Automata pohár- és PET dobozzáró</span>
+      <h2 class="disp big">Forma.<br>Zárás.<br><span style="color:var(--deep)">Funkció.</span></h2>
+      <p class="lead" style="margin-top:20px">210–1000 ml-es dobozok adaptercserével, 220 V-ról, pultra tehető.</p>
+      <div class="ctas"><a class="btn" href="#">Ajánlatot kérek ↗</a></div>
+    </div>
+    <div class="art">
+      <div class="ph"><img src="kepek-webp/hero-dobozzaro-gep-feher.webp" alt="Fehér dobozzáró gép"></div>
+      <i class="s1"></i><i class="s2"></i><i class="s3"></i><div class="s4">1 ÉV<br>GARANCIA</div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 07 -->
+<section class="demo v7 dark" id="v7"><div class="wrap">
+  <div class="label"><b>07</b><span>Sötét kiadás</span><small>Fekete háttér, fehér betű, narancs kiemelés; a gép kör alakú, többszínű gyűrűben. Prémiumabb hatás.</small></div>
+  <div class="h">
+    <div class="txt">
+      <span class="eyebrow" style="--k:var(--lemon)">CupSeal Automatic</span>
+      <h2 class="disp big">Dobozzáró<br><em>gép a</em><br><mark>pultodra.</mark></h2>
+      <div class="price"><b>450 000 Ft</b><span>+ ÁFA</span></div>
+      <div class="ctas"><a class="btn" href="#">Ajánlatot kérek ↗</a><a class="btn line" href="#">Műszaki adatok</a></div>
+    </div>
+    <div class="art"><div class="ph"><img src="kepek-webp/hero-dobozzaro-gep-feher.webp" alt="Fehér dobozzáró gép"></div></div>
+  </div>
+</div></section>
+
+<!-- 08 -->
+<section class="demo v8" id="v8"><div class="wrap">
+  <div class="label"><b>08</b><span>Ár-fókusz</span><small>Az ár maga a főcím; a gép körül „buborékokban” a fő adatok.</small></div>
+  <div class="h">
+    <div class="txt">
+      <h2 class="disp sub">Automata dobozzáró gép</h2>
+      <p class="disp huge">450 000<small> FT + ÁFA</small></p>
+      <p class="lead" style="margin-top:18px">Próbazárással, 1 év garanciával, online műszaki támogatással.</p>
+      <div class="ctas"><a class="btn" href="#">Ajánlatot kérek ↗</a></div>
+    </div>
+    <div class="art">
+      <div class="ph"><img src="kepek-webp/hero-dobozzaro-gep-feher.webp" alt="Fehér dobozzáró gép"></div>
+      <span class="pill p1">220 V</span><span class="pill p2">210–1000 ml</span><span class="pill p3">Fehér / fekete</span>
+    </div>
+  </div>
+</div></section>
+
+<!-- 09 -->
+<section class="demo v9" id="v9">
+  <div class="label"><b>09</b><span>Osztott képernyő</span><small>Fele narancs szövegblokk, fele kép a képernyő széléig. Telefonon narancs blokk, alatta teljes szélességű kép.</small></div>
+  <div class="split">
+    <div class="left">
+      <span class="eyebrow" style="--k:var(--ink)">Dobozzáró gép vendéglátóhelyeknek</span>
+      <h2 class="disp big">Betöltöd.<br>Lezárja.</h2>
+      <div class="price"><b>450 000 Ft</b><span>+ ÁFA</span></div>
+      <div class="ctas"><a class="btn" href="#">Ajánlatot kérek ↗</a><a class="btn line" href="#">Műszaki adatok</a></div>
+    </div>
+    <div class="ph"><img src="kepek-webp/hero-dobozzaro-gep-feher.webp" alt="Fehér dobozzáró gép"></div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="demo v10" id="v10"><div class="wrap">
+  <div class="label"><b>10</b><span>Magazin</span><small>Szerkesztőségi stílus: függőleges oldalfelirat, számozott fejléc, adat-sor a cím alatt, képaláírás.</small></div>
+  <div class="h">
+    <div class="side">CUP SEAL · Kiadás 2026</div>
+    <div class="txt">
+      <div class="num"><span>№ 01</span><span>Dobozzáró gép</span></div>
+      <h2 class="disp big">Az elvitel<br>új <mark>formája.</mark></h2>
+      <div class="stats">
+        <div><b>220 V</b><span>pultra tehető</span></div>
+        <div><b>1 év</b><span>garancia</span></div>
+        <div><b>2 szín</b><span>fehér / fekete</span></div>
+      </div>
+      <div class="ctas"><a class="btn" href="#">Ajánlatot kérek ↗</a></div>
+    </div>
+    <figure>
+      <div class="ph"><img src="kepek-webp/hero-dobozzaro-gep-feher.webp" alt="Fehér dobozzáró gép"></div>
+      <figcaption><span>CupSeal Automatic, fehér</span><span>450 000 Ft + ÁFA</span></figcaption>
+    </figure>
+  </div>
+</div></section>
+
+</body>
+</html>
