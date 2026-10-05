@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="kepek-webp/dobozzaro-gep-feher-kivagott.webp" as="image" type="image/webp">
+<link rel="preload" href="kepek-webp/matcha-lezart-doboz.png" as="image" type="image/png">
 <link rel="stylesheet" href="assets/fonts.css">
 <style>
 /* Paletta: fehér alap + citrom → narancs árnyalatok */
@@ -186,8 +186,8 @@ header{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:2p
 .stage .arch{position:absolute;left:5%;right:5%;top:24%;bottom:6%;border:2px solid var(--line);border-bottom:0;border-radius:999px 999px 0 0;overflow:hidden;
   background:radial-gradient(circle at 50% 38%,var(--pale) 0 22%,var(--lemon) 22.4% 34%,var(--amber) 34.4% 46%,var(--orange) 46.4%)}
 .stage .floor{position:absolute;left:0;right:0;bottom:6%;height:2px;background:var(--line);z-index:1}
-.stage .contact{position:absolute;z-index:1;left:24%;right:20%;bottom:calc(6% - 14px);height:30px;border-radius:50%;background:radial-gradient(closest-side,rgba(16,16,20,.55),rgba(16,16,20,0))}
-.stage .machine{position:absolute;z-index:2;height:86%;width:auto;max-width:none;left:50%;bottom:6.4%;transform:translateX(-47%);
+.stage .contact{position:absolute;z-index:1;left:28%;right:28%;bottom:calc(6% - 14px);height:30px;border-radius:50%;background:radial-gradient(closest-side,rgba(16,16,20,.55),rgba(16,16,20,0))}
+.stage .termek{position:absolute;z-index:2;height:84%;width:auto;max-width:none;left:50%;bottom:6.2%;transform:translateX(-50%);
   filter:drop-shadow(0 2px 2px rgba(16,16,20,.35)) drop-shadow(22px 18px 22px rgba(16,16,20,.28))}
 .burst{position:absolute;left:-2cqw;top:30%;width:27cqw;aspect-ratio:1;display:grid;place-items:center;text-align:center;z-index:3;transform:rotate(-9deg);color:var(--ink)}
 .burst::before,.burst::after,.burst b{content:"";position:absolute;inset:11%;background:var(--deep)}
@@ -405,8 +405,7 @@ footer{background:var(--ink);color:var(--white)}
     </div>
     <div class="stage">
       <span class="sun"></span><span class="q"></span><span class="arch"></span><span class="floor"></span><span class="contact"></span>
-      <img class="machine" src="kepek-webp/dobozzaro-gep-feher-kivagott.webp" width="609" height="1000" alt="Fehér CupSeal Automatic dobozzáró gép" fetchpriority="high">
-      <div class="burst"><b></b><span>1 év<small>GARANCIA</small></span></div>
+      <img class="termek" src="kepek-webp/matcha-lezart-doboz.png" width="511" height="1100" alt="Jeges matcha latte lezárt, fémfedeles PET dobozban" fetchpriority="high">
     </div>
     <div class="h-act">
       <div class="hero-price"><b>450 000 Ft</b><span>+ ÁFA</span></div>
